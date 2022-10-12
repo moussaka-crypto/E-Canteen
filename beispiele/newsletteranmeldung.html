@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+- Praktikum DBWT. Autoren:
+- Muhammad Zulfahmi, bin Zaid, 3520750
+- Hristomir, Dimov, 3536320
+-->
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Newsletteranmeldung</title>
+</head>
+<body>
+<form action="beispiele/formdata.html" method="post">
+  <fieldset>
+    <legend><h1>Anmeldung:</h1></legend>
+    <input type="reset" value ="Zur&uuml;cksetzen">
+    <h3>Anrede</h3>
+
+      <input id="frau" type="radio" name="geschlecht" value="Frau">
+    <label for="frau">Frau</label><br>
+
+
+      <input id="herr" type="radio" name="geschlecht" value="Herr">
+    <label for="herr">Herr</label><br><br>
+
+    <label for="vname"><b>Vorname*</b></label> <br>
+    <input type="text" size="35" placeholder="Bitte geben Sie Ihren Vornamen ein"
+           id="vname" name="vname" required><br><br>
+
+    <label for="nname"><b>Nachname*</b></label> <br>
+    <input type="text" size="35" placeholder="Bitte geben Sie Ihren Nachnamen ein"
+           id="nname" name="nname" required><br><br>
+
+    <label for="email"><b>E-Mail*</b></label> <br>
+    <input type="email" size="35" placeholder="Bitte geben Sie Ihre E-Mail ein ein"
+           id="email" name="email" required><br><br>
+
+    <label>Benachrichtigungsintervall</label> <br>
+    <label for="intervall"></label>
+    <select name="benachrichtigungsintervall" id="intervall">
+      <option value="Tag">Tag</option>
+      <option value="Woche">Woche</option>
+      <option value="Monat">Monat</option>
+    </select> <br> <br>
+
+
+      <input id="datenschutzt" type="checkbox" required>
+    <label for= "datenschutzt"> Datenschutzhinweise gelesen</label><br>
+
+    <input type="submit" value="Abschicken"> <br><br>
+    *) Eingaben sind Pflicht <br>
+    </fieldset>
+</form>
+</body>
+</html>

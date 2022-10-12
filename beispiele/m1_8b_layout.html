@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+- Praktikum DBWT. Autoren:
+- Muhammad Zulfahmi, bin Zaid, 3520750
+- Hristomir, Dimov, 3536320
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aufgabe 8b</title>
+    <style>
+        .grid-container-1{
+            display: grid;
+        }
+        .grid-container-2{
+            display: grid;
+            grid-template-columns: auto auto auto;
+        }
+        .grid-item{
+            border: 1px solid black;
+            padding: 10px;
+            font-size: 20px;
+        }
+        .grid-item-centralisiert{
+            border: 1px solid black;
+            padding: 10px;
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<p>drei Elemente untereinander</p>
+<div class="grid-container-1">
+    <div class="grid-item">erste Item</div>
+    <div class="grid-item">zweite Item</div>
+    <div class="grid-item">dritte Item</div>
+</div>
+<p>drei Elemente nebeneinander</p>
+<div class="grid-container-2">
+    <div class="grid-item">erste Item</div>
+    <div class="grid-item-centralisiert">zewite Item</div>
+    <div class="grid-item">dritte Item</div>
+</div>
+<p>Ein Element zentralisiert</p>
+<div>
+    <div class = "grid-item-centralisiert">Item</div>
+</div>
+</body>
+</html>
