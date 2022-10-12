@@ -8,9 +8,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Newsletteranmeldung</title>
+  <style>
+    fieldset{
+      width: 250px;
+    }
+  </style>
 </head>
 <body>
-<form action="beispiele/formdata.html" method="post">
+<form action="beispiele/formdata.html" method="post"><!--Daten im Body-->
   <fieldset>
     <legend><h1>Anmeldung:</h1></legend>
     <input type="reset" value ="Zur&uuml;cksetzen">
@@ -18,7 +23,6 @@
 
       <input id="frau" type="radio" name="geschlecht" value="Frau">
     <label for="frau">Frau</label><br>
-
 
       <input id="herr" type="radio" name="geschlecht" value="Herr">
     <label for="herr">Herr</label><br><br>
@@ -37,6 +41,7 @@
 
     <label>Benachrichtigungsintervall</label> <br>
     <label for="intervall"></label>
+
     <select name="benachrichtigungsintervall" id="intervall">
       <option value="Tag">Tag</option>
       <option value="Woche">Woche</option>
@@ -44,8 +49,8 @@
     </select> <br> <br>
 
 
-      <input id="datenschutzt" type="checkbox" required>
-    <label for= "datenschutzt"> Datenschutzhinweise gelesen</label><br>
+      <input id="datenschutz" type="checkbox" required>
+    <label for= "datenschutz"> Datenschutzhinweise gelesen</label><br>
 
     <input type="submit" value="Abschicken"> <br><br>
     *) Eingaben sind Pflicht <br>
