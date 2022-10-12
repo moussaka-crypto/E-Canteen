@@ -11,21 +11,30 @@
     <style>
         .grid-container-1{
             display: grid;
+            gap: 5px;
+        }
+        .grid-container-1 .grid-item {
+            background-color: darkturquoise;
         }
         .grid-container-2{
             display: grid;
             grid-template-columns: auto auto auto;
+            gap: 5px;
+        }
+        .grid-container-2 > .grid-item-centralisiert, .grid-item{
+            background-color: darkkhaki;
         }
         .grid-item{
             border: 1px solid black;
-            padding: 10px;
+            padding: 8px;
             font-size: 20px;
         }
         .grid-item-centralisiert{
             border: 1px solid black;
-            padding: 10px;
+            padding: 8px;
             font-size: 20px;
             text-align: center;
+            background-color: darkorchid;
         }
     </style>
 </head>
@@ -39,7 +48,7 @@
 <p>drei Elemente nebeneinander</p>
 <div class="grid-container-2">
     <div class="grid-item">erste Item</div>
-    <div class="grid-item-centralisiert">zewite Item</div>
+    <div class="grid-item-centralisiert">zweite Item</div>
     <div class="grid-item">dritte Item</div>
 </div>
 <p>Ein Element zentralisiert</p>
