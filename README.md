@@ -1,3 +1,3 @@
 # E-Mensa
 
-Semesterprojekt in DBWT
+Semesterprojekt in DBWT.
