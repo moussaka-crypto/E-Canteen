@@ -42,13 +42,14 @@ $showRatings = [];
 $searchedItem = "";
 
 if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) { // es fehlt schließende Klammern
-    $searchTerm = strtolower($_GET[GET_PARAM_SEARCH_TEXT]);
+    $searchTerm = $_GET[GET_PARAM_SEARCH_TEXT];
     foreach ($ratings as $rating) {
-        if (strtolower($rating['text']) == $searchTerm) { // strpos($rating['text'], $searchTerm) !== false
+        if (strpos(strtolower($rating['text']),strtolower($searchTerm)) !== false) {
             $showRatings[] = $rating;
         }
     }
     $searchedItem = $searchTerm;
+
 } else if (!empty($_GET[GET_PARAM_MIN_STARS])) {
     $minStars = $_GET[GET_PARAM_MIN_STARS];
     foreach ($ratings as $rating) {
