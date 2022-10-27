@@ -140,7 +140,29 @@
                 <td>Preis intern</td>
                 <td>Preis extern</td>
             </tr>
-            <tr>
+            <?php //here i guess
+            include ('gerichte.php');
+            if(isset($gerichte))
+            {
+                for($i = 0; $i < count($gerichte); $i++){
+                    echo '<tr>';
+                    for($j = 0; $j < count($gerichte[$i]); $j++)
+                    {
+                        if($j!=count($gerichte[$i])-1)
+                            echo '<td>'.$gerichte[$i][$j].'</td>';
+                        else
+                        {   //letztes Element ist das Bild
+                            $p = "img/".$gerichte[$i][$j];
+                            echo '<td><img src="'; //source des Bilds
+                            echo $p; //Pfad zum Bild
+                            echo '"width=400px height=250px alt=gerichte></td>'; // Parameter
+                        }
+                    }
+                    echo '</tr>';
+                }
+            }
+            ?>
+<!--            <tr>
                 <td>
                     Rindfleisch mit Bambus, Kaiserschotten<br>
                     und rotem Paprika, dazu Nudeln </td>
@@ -158,7 +180,7 @@
                 <td class="Dots1">...</td>
                 <td class="Dots2">...</td>
                 <td class="Dots3">...</td>
-            </tr>
+            </tr>-->
         </table>
 
         <h2 id="zahlen">E-Mensa in Zahlen</h2>
