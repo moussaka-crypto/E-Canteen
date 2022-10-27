@@ -18,31 +18,35 @@ font-family: Arial,sans-serif;
 
 </style>';
 
-echo '<ol>';
-for($i = 1; $i <= count($famousMeals); $i++)
+function winners($famousMeals): void
 {
-    echo '<li>';
-    echo $famousMeals[$i]['name'] . '<br>';
-    if($i != count($famousMeals))
+    echo 'Winners as listed: '.'<br>';
+    echo '<ol>';
+    for($i = 1; $i <= count($famousMeals); $i++)
     {
-        for($j = count($famousMeals[$i]['winner'])-1; $j>=0; $j--)
+        echo '<li>';
+        echo $famousMeals[$i]['name'] . '<br>';
+        if($i != count($famousMeals))
         {
-            if($j==0)
-                echo $famousMeals[$i]['winner'][$j];
-            else
-                echo $famousMeals[$i]['winner'][$j].', ';
+            for($j = count($famousMeals[$i]['winner'])-1; $j>=0; $j--)
+            {
+                if($j==0)
+                    echo $famousMeals[$i]['winner'][$j];
+                else
+                    echo $famousMeals[$i]['winner'][$j].', ';
+            }
         }
+        else
+            echo $famousMeals[$i]['winner']; //Ende
+        echo '</li>';
     }
-    else
-        echo $famousMeals[$i]['winner'];
-    echo '</li>';
+    echo'</ol>';
 }
-echo'</ol>';
-
-
-echo losers($famousMeals);
-function losers($famousMeals)
+function losers($famousMeals): void
 {
+    echo'<br>';
+    echo 'No winners in: '.'<br>';
+    $allLosers=[];
     for($jahr = 2000; $jahr<2023; $jahr++)
     {
         $loser = true;
@@ -62,7 +66,14 @@ function losers($famousMeals)
             }
         }
         if($loser)
-            echo "Pathetic losers in: ".$jahr.'<br>';
-
+            array_push($allLosers,$jahr);
     }
+    for($i=0;$i<count($allLosers);$i++)
+        if($i==count($allLosers)-1)
+            echo $allLosers[$i].'.';
+        else
+            echo $allLosers[$i].', ';
 }
+
+winners($famousMeals);
+losers($famousMeals);
