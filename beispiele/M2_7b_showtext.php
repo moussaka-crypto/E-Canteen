@@ -17,7 +17,7 @@ $line = "";
 $exist = false;
 
 while(!feof($search_word)){
-    $line = $line . trim (fgets($search_word,1024)).';';
+    $line = $line . trim(fgets($search_word,1024)).';';
 }
 
 $words = explode(";", $line);
