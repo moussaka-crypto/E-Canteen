@@ -1,5 +1,5 @@
 <?php
-include 'index.html';
+/*//include 'werbeseite.php';
 
 const POST_PARAM_VNAME = 'vorname';
 const POST_PARAM_EMAIL = 'email';
@@ -16,7 +16,6 @@ if(isset($_POST[POST_PARAM_VNAME])){
     if(!ctype_alpha($check_name)) {
         $valid = false;
     }
-
     if($valid){
         $data [] = $_POST[POST_PARAM_VNAME];
         unset($fehler_name);
@@ -29,7 +28,6 @@ else{
     $valid = false;
     $fehler_name = "Namen entspricht nicht der Vorgaben";
 }
-
 
 if(isset($_POST[POST_PARAM_EMAIL])){
     $check_email = $_POST[POST_PARAM_EMAIL];
@@ -77,4 +75,28 @@ else
     unset($data);
 }
 
+*/
 
+function checkName($vorname)
+{
+    if(ctype_space($vorname) || !ctype_alpha($vorname))
+    {
+        echo "Namen falsch eingegeben!";
+    }
+    else return trim($vorname);
+    return null;
+}
+function checkMail($mail)
+{
+    if(isset($_POST["email"])&& !filter_var($mail,FILTER_VALIDATE_EMAIL))
+        echo "Invalide E-Mail eingegeben!";
+
+    elseif(stripos($mail,'rcpt.at')||
+        stripos($mail,'damnthespam.at')||
+        stripos($mail,'wegwerfmail.de')||
+        stripos($mail,'trashmail'))
+        echo "Trash mail!";
+
+    else return $mail;
+    return null;
+}

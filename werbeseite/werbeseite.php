@@ -4,6 +4,7 @@
 - Muhammad Zulfahmi, bin Zaid, 3520750
 - Hristomir, Dimov, 3536320
 -->
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -61,7 +62,7 @@
             grid-column-end: 4;
         }
         .Food, .TheNumbersMasonWhatDoTheyMean{
-            width: 85%
+            width: 90%
         }
         .end{
             text-align: center;
@@ -155,32 +156,13 @@
                             $p = "img/".$gerichte[$i][$j];
                             echo '<td><img src="'; //source des Bilds
                             echo $p; //Pfad zum Bild
-                            echo '"width=400px height=250px alt=gerichte></td>'; // Parameter
+                            echo '"width=500px height=250px alt=gerichte></td>'; // Parameter
                         }
                     }
                     echo '</tr>';
                 }
             }
             ?>
-<!--            <tr>
-                <td>
-                    Rindfleisch mit Bambus, Kaiserschotten<br>
-                    und rotem Paprika, dazu Nudeln </td>
-                <td class="PreisIntern">3,50</td>
-                <td class="PreisExtern">6,20</td>
-            </tr>
-            <tr>
-                <td>Spinatrisotto mit kleinem Samosateigecken<br>
-                    und gemischter Salat
-                </td>
-                <td class="PreisIntern1">2,90</td>
-                <td class="PreisExtern1">5,30</td>
-            </tr>
-            <tr>
-                <td class="Dots1">...</td>
-                <td class="Dots2">...</td>
-                <td class="Dots3">...</td>
-            </tr>-->
         </table>
 
         <h2 id="zahlen">E-Mensa in Zahlen</h2>
@@ -193,10 +175,18 @@
         </table>
         <br><br>
         <h2 id="kontakt">Interesse geweckt? Wir informieren Sie!</h2>
-        <form method="post">
+        <?php
+        include("Newsletteranmeldung.php");
+        if(isset($_POST["vorname"]) && isset($_POST["email"]))
+        {
+            $rName = checkName($_POST["vorname"]);
+            $rMail = checkMail($_POST["email"]);
+        }
+        ?>
+        <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
             <fieldset>
-                <label for="vname">Ihr Name:</label>
-                <input name = "vorname" type="text" size="10" placeholder="Vorname" id="vname" required>
+                <label for="vorname">Ihr Name:</label>
+                <input name = "vorname" type="text" size="10" placeholder="Vorname" id="vorname" required>
 
                 <label for="email">Ihre E-mail:</label>
                 <input name = "email" type="email" size="10" id="email" required>
@@ -215,6 +205,16 @@
                 </div>
             </fieldset>
         </form>
+        <?php
+        $file = fopen('Benutzerdaten.txt','a');
+
+        if(isset($rName) && isset($rMail))
+        {
+            fwrite($file,$rName.';'.$rMail.';'.$_POST["newsletterSprache"]."\n");
+            echo "SUCCessful!";
+        }
+        fclose($file);
+        ?>
         <h2 id="wichtiges">Das ist uns wichtig...</h2>
         <ul id="endList">
             <li>Beste frische saisonale Zutaten</li>

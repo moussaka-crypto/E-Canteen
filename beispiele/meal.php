@@ -104,7 +104,7 @@ function calcMeanStars(array $ratings) : float { // das Wort function
                 font-family: Arial, serif;
             }
             .rating {
-                color: darkgray;
+                color: indigo;
             }
             td {
                 padding-right: 20px;
