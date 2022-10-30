@@ -196,22 +196,22 @@
         <form method="post">
             <fieldset>
                 <label for="vname">Ihr Name:</label>
-                <input type="text" size="10" placeholder="Vorname" id="vname" required>
+                <input name = "vorname" type="text" size="10" placeholder="Vorname" id="vname" required>
 
                 <label for="email">Ihre E-mail:</label>
-                <input type="email" size="10" id="email" required>
+                <input name = "email" type="email" size="10" id="email" required>
 
                 <label for="newsletterLang">Newsletter bitte in:</label>
-                <select name="Newsletter bitte in: " id="newsletterLang">
+                <select name="newsletterSprache" id="newsletterLang">
                     <option value="De">Deutsch</option>
                     <option value="En">Englisch</option>
                 </select> <br><br>
                 <div>
                     <label>
-                        <input type="checkbox" required>
+                        <input name = "datenschutz" type="checkbox" required>
                     </label>
                     Den Datenschutzbedingungen stimme ich zu<br><br>
-                    <input type="submit" value="Zum Newsletter anmelden" disabled>
+                    <input type="submit" value="Zum Newsletter anmelden">
                 </div>
             </fieldset>
         </form>
