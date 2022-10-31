@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 /**
  * Praktikum DBWT. Autoren:
  * Hristomir, Dimov, 3536320
@@ -279,3 +280,5 @@ include("Newsletteranmeldung.php");
 </div>
 </body>
 </html>
+=======
+>>>>>>> Zulfahmi
