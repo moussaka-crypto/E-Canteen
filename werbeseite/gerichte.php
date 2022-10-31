@@ -1,4 +1,9 @@
 <?php
+/**
+ * Praktikum DBWT. Autoren:
+ * Hristomir, Dimov, 3536320
+ * Muhammad Zulfahmi, bin Zaid, 3520750
+ */
 
 $gerichte = [
     0 => ['Rindfleisch mit Bambus, Kaiserschotten und rotem Paprika, dazu Nudeln','3.50','6.20','rindf.jpg'],

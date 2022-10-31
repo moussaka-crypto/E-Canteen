@@ -1,4 +1,9 @@
 <?php
+/**
+ * Praktikum DBWT. Autoren:
+ * Hristomir, Dimov, 3536320
+ * Muhammad Zulfahmi, bin Zaid, 3520750
+ */
 include ("m2_4a_standardparameter.php");
 
 if(isset($_GET["A"]) && isset($_GET["B"]))

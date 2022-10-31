@@ -1,4 +1,10 @@
 <?php
+/**
+ * Praktikum DBWT. Autoren:
+ * Hristomir, Dimov, 3536320
+ * Muhammad Zulfahmi, bin Zaid, 3520750
+ */
+
 function checkName($vorname)
 {
     if(ctype_space($vorname) || !ctype_alpha($vorname))

@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<!--
-- Praktikum DBWT. Autoren:
-- Muhammad Zulfahmi, bin Zaid, 3520750
-- Hristomir, Dimov, 3536320
--->
 <?php
+/**
+ * Praktikum DBWT. Autoren:
+ * Hristomir, Dimov, 3536320
+ * Muhammad Zulfahmi, bin Zaid, 3520750
+ */
+
 include("Newsletteranmeldung.php");
 ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
