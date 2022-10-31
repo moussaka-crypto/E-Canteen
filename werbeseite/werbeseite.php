@@ -4,7 +4,9 @@
 - Muhammad Zulfahmi, bin Zaid, 3520750
 - Hristomir, Dimov, 3536320
 -->
-
+<?php
+include("Newsletteranmeldung.php");
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -101,6 +103,16 @@
             width: 100%;
             padding-top: 20px;
         }
+        .succ{
+            font-family: "Baskerville  Face", serif;
+            font-size: 22px;
+            color: green;
+        }
+        .vibeCheck{
+            font-family: "Baskerville  Face", serif;
+            font-size: 22px;
+            color:darkred;
+        }
     </style>
 </head>
 <body>
@@ -141,29 +153,30 @@
                 <td>Preis intern</td>
                 <td>Preis extern</td>
             </tr>
-            <?php //here i guess
-            include ('gerichte.php');
-            if(isset($gerichte))
-            {
-                for($i = 0; $i < count($gerichte); $i++){
-                    echo '<tr>';
-                    for($j = 0; $j < count($gerichte[$i]); $j++)
-                    {
-                        if($j!=count($gerichte[$i])-1)
-                            echo '<td>'.$gerichte[$i][$j].'</td>';
-                        else
-                        {   //letztes Element ist das Bild
-                            $p = "img/".$gerichte[$i][$j];
-                            echo '<td><img src="'; //source des Bilds
-                            echo $p; //Pfad zum Bild
-                            echo '"width=500px height=250px alt=gerichte></td>'; // Parameter
+
+                <?php //here i guess
+                include ('gerichte.php');
+                if(isset($gerichte))
+                {
+                    for($i = 0; $i < count($gerichte); $i++){
+                        echo '<tr>';
+                        for($j = 0; $j < count($gerichte[$i]); $j++)
+                        {
+                            if($j!=count($gerichte[$i])-1)
+                                echo '<td>'.$gerichte[$i][$j].'</td>';
+                            else
+                            {   //letztes Element ist das Bild
+                                $p = "img/".$gerichte[$i][$j];
+                                echo '<td><img src="'; //source des Bilds
+                                echo $p; //Pfad zum Bild
+                                echo '"width=450px height=250px alt=gerichte></td>'; // Parameter
+                            }
                         }
+                        echo '</tr>';
                     }
-                    echo '</tr>';
                 }
-            }
-            ?>
-        </table>
+                ?>
+            </table>
 
         <h2 id="zahlen">E-Mensa in Zahlen</h2>
         <table class="TheNumbersMasonWhatDoTheyMean">
@@ -175,46 +188,76 @@
         </table>
         <br><br>
         <h2 id="kontakt">Interesse geweckt? Wir informieren Sie!</h2>
-        <?php
-        include("Newsletteranmeldung.php");
-        if(isset($_POST["vorname"]) && isset($_POST["email"]))
-        {
-            $rName = checkName($_POST["vorname"]);
-            $rMail = checkMail($_POST["email"]);
-        }
-        ?>
-        <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
+        <p class = "vibeCheck">
+            <?php
+            $rName = "";
+            $rMail = "";
+            $sprache = "";
+
+            if(isset($_POST["vorname"], $_POST["email"],$_POST["newsletterSprache"]))
+            {
+                $rName = checkName($_POST["vorname"]);
+                $rMail = checkMail($_POST["email"]);
+                $sprache = $_POST["newsletterSprache"];
+            }
+            ?>
+        </p>
+        <form method="post" action="">
             <fieldset>
-                <label for="vorname">Ihr Name:</label>
-                <input name = "vorname" type="text" size="10" placeholder="Vorname" id="vorname" required>
+                <p>
+                    <label for="vorname">Ihr Name:</label>
+                    <input name = "vorname" type="text" size="10" placeholder="Vorname" id="vorname" required>
+                </p>
 
-                <label for="email">Ihre E-mail:</label>
-                <input name = "email" type="email" size="10" id="email" required>
-
+                <p>
+                    <label for="email">Ihre E-mail:</label>
+                    <input name = "email" type="email" size="10" id="email" required>
+                </p>
+                
                 <label for="newsletterLang">Newsletter bitte in:</label>
                 <select name="newsletterSprache" id="newsletterLang">
-                    <option value="De">Deutsch</option>
-                    <option value="En">Englisch</option>
+                    <option value="de">Deutsch</option>
+                    <option value="en">Englisch</option>
                 </select> <br><br>
                 <div>
                     <label>
                         <input name = "datenschutz" type="checkbox" required>
                     </label>
                     Den Datenschutzbedingungen stimme ich zu<br><br>
-                    <input type="submit" value="Zum Newsletter anmelden">
+                    <input type="submit" name = "submitForm" value="Zum Newsletter anmelden">
                 </div>
             </fieldset>
         </form>
         <?php
-        $file = fopen('Benutzerdaten.txt','a');
 
-        if(isset($rName) && isset($rMail))
+        $exist = false;
+        $userdata  = $rName.';'.$rMail.';'.$sprache."\n";
+        $filecheck = fopen("Benutzerdaten.txt", 'r');
+        while(!feof($filecheck))
         {
-            fwrite($file,$rName.';'.$rMail.';'.$_POST["newsletterSprache"]."\n");
-            echo "SUCCessful!";
+            if($userdata == fgets($filecheck)) {
+                $exist = true;
+                echo "Wurde schon gespeichert!";
+                break;
+            }
         }
-        fclose($file);
+        fclose($filecheck);
         ?>
+        <p class = "succ">
+            <?php
+            if(!$exist)
+            {
+                $file = fopen('Benutzerdaten.txt','a');
+
+                if(isset($rName, $rMail,$sprache) && $userdata != ";;"."\n")
+                {
+                    fwrite($file,$rName.';'.$rMail.';'.$sprache."\n");
+                    echo "Anmeldung erfolgreich!";
+                }
+                fclose($file);
+            }
+            ?>
+        </p>
         <h2 id="wichtiges">Das ist uns wichtig...</h2>
         <ul id="endList">
             <li>Beste frische saisonale Zutaten</li>
