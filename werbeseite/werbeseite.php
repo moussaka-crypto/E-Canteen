@@ -1,9 +1,13 @@
+<?php
+/**
+ * Praktikum DBWT. Autoren:
+ * Hristomir, Dimov, 3536320
+ * Muhammad Zulfahmi, bin Zaid, 3520750
+ */
+
+include("Newsletteranmeldung.php");
+?>
 <!DOCTYPE html>
-<!--
-- Praktikum DBWT. Autoren:
-- Muhammad Zulfahmi, bin Zaid, 3520750
-- Hristomir, Dimov, 3536320
--->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -61,7 +65,7 @@
             grid-column-end: 4;
         }
         .Food, .TheNumbersMasonWhatDoTheyMean{
-            width: 85%
+            width: 90%
         }
         .end{
             text-align: center;
@@ -99,6 +103,16 @@
         .pic{
             width: 100%;
             padding-top: 20px;
+        }
+        .succ{
+            font-family: "Baskerville  Face", serif;
+            font-size: 22px;
+            color: green;
+        }
+        .vibeCheck{
+            font-family: "Baskerville  Face", serif;
+            font-size: 22px;
+            color:darkred;
         }
     </style>
 </head>
@@ -140,26 +154,30 @@
                 <td>Preis intern</td>
                 <td>Preis extern</td>
             </tr>
-            <tr>
-                <td>
-                    Rindfleisch mit Bambus, Kaiserschotten<br>
-                    und rotem Paprika, dazu Nudeln </td>
-                <td class="PreisIntern">3,50</td>
-                <td class="PreisExtern">6,20</td>
-            </tr>
-            <tr>
-                <td>Spinatrisotto mit kleinem Samosateigecken<br>
-                    und gemischter Salat
-                </td>
-                <td class="PreisIntern1">2,90</td>
-                <td class="PreisExtern1">5,30</td>
-            </tr>
-            <tr>
-                <td class="Dots1">...</td>
-                <td class="Dots2">...</td>
-                <td class="Dots3">...</td>
-            </tr>
-        </table>
+
+                <?php //here i guess
+                include ('gerichte.php');
+                if(isset($gerichte))
+                {
+                    for($i = 0; $i < count($gerichte); $i++){
+                        echo '<tr>';
+                        for($j = 0; $j < count($gerichte[$i]); $j++)
+                        {
+                            if($j!=count($gerichte[$i])-1)
+                                echo '<td>'.$gerichte[$i][$j].'</td>';
+                            else
+                            {   //letztes Element ist das Bild
+                                $p = "img/".$gerichte[$i][$j];
+                                echo '<td><img src="'; //source des Bilds
+                                echo $p; //Pfad zum Bild
+                                echo '"width=450px height=250px alt=gerichte></td>'; // Parameter
+                            }
+                        }
+                        echo '</tr>';
+                    }
+                }
+                ?>
+            </table>
 
         <h2 id="zahlen">E-Mensa in Zahlen</h2>
         <table class="TheNumbersMasonWhatDoTheyMean">
@@ -171,28 +189,76 @@
         </table>
         <br><br>
         <h2 id="kontakt">Interesse geweckt? Wir informieren Sie!</h2>
-        <form method="post">
+        <p class = "vibeCheck">
+            <?php
+            $rName = "";
+            $rMail = "";
+            $sprache = "";
+
+            if(isset($_POST["vorname"], $_POST["email"],$_POST["newsletterSprache"]))
+            {
+                $rName = checkName($_POST["vorname"]);
+                $rMail = checkMail($_POST["email"]);
+                $sprache = $_POST["newsletterSprache"];
+            }
+            ?>
+        </p>
+        <form method="post" action="">
             <fieldset>
-                <label for="vname">Ihr Name:</label>
-                <input type="text" size="10" placeholder="Vorname" id="vname" required>
+                <p>
+                    <label for="vorname">Ihr Name:</label>
+                    <input name = "vorname" type="text" size="10" placeholder="Vorname" id="vorname" required>
+                </p>
 
-                <label for="email">Ihre E-mail:</label>
-                <input type="email" size="10" id="email" required>
-
+                <p>
+                    <label for="email">Ihre E-mail:</label>
+                    <input name = "email" type="email" size="10" id="email" required>
+                </p>
+                
                 <label for="newsletterLang">Newsletter bitte in:</label>
-                <select name="Newsletter bitte in: " id="newsletterLang">
-                    <option value="De">Deutsch</option>
-                    <option value="En">Englisch</option>
+                <select name="newsletterSprache" id="newsletterLang">
+                    <option value="de">Deutsch</option>
+                    <option value="en">Englisch</option>
                 </select> <br><br>
                 <div>
                     <label>
-                        <input type="checkbox" required>
+                        <input name = "datenschutz" type="checkbox" required>
                     </label>
                     Den Datenschutzbedingungen stimme ich zu<br><br>
-                    <input type="submit" value="Zum Newsletter anmelden" disabled>
+                    <input type="submit" name = "submitForm" value="Zum Newsletter anmelden">
                 </div>
             </fieldset>
         </form>
+        <?php
+
+        $exist = false;
+        $userdata  = $rName.';'.$rMail.';'.$sprache."\n";
+        $filecheck = fopen("Benutzerdaten.txt", 'r');
+        while(!feof($filecheck))
+        {
+            if($userdata == fgets($filecheck)) {
+                $exist = true;
+                echo "Wurde schon gespeichert!";
+                break;
+            }
+        }
+        fclose($filecheck);
+        ?>
+        <p class = "succ">
+            <?php
+            if(!$exist)
+            {
+                $file = fopen('Benutzerdaten.txt','a');
+
+                if(isset($rName, $rMail,$sprache) && $userdata != ";;"."\n")
+                {
+                    fwrite($file,$rName.';'.$rMail.';'.$sprache."\n");
+                    echo "Anmeldung erfolgreich!";
+                }
+                fclose($file);
+            }
+            ?>
+        </p>
         <h2 id="wichtiges">Das ist uns wichtig...</h2>
         <ul id="endList">
             <li>Beste frische saisonale Zutaten</li>
