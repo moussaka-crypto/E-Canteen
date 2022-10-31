@@ -1,6 +1,13 @@
 <?php
+/**
+ * Praktikum DBWT. Autoren:
+ * Hristomir, Dimov, 3536320
+ * Muhammad Zulfahmi, bin Zaid, 3520750
+ */
+
 const GET_PARAM_MIN_STARS = 'search_min_stars';
 const GET_PARAM_SEARCH_TEXT = 'search_text';
+
 const GET_PARAM_SHOW_DES = 'show_description';
 const GET_PARAM_LANG = 'sprache';
 const GET_PARAM_TOP_OR_FLOP = 'top_or_flop';
@@ -64,10 +71,10 @@ $ratings = [
 $showRatings = [];
 $searchedItem = "";
 
-if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) { // es fehlt schließende Klammern
+if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) { // es fehlten schließende Klammern
     $searchTerm = $_GET[GET_PARAM_SEARCH_TEXT];
     foreach ($ratings as $rating) {
-        if (strpos(strtolower($rating['text']),strtolower($searchTerm)) !== false) {
+        if (str_contains(strtolower($rating['text']), strtolower($searchTerm))) {
             $showRatings[] = $rating;
         }
     }
@@ -103,7 +110,7 @@ function calcMeanStars(array $ratings) : float { // das Wort function
                 font-family: Arial, serif;
             }
             .rating {
-                color: darkgray;
+                color: indigo;
             }
             td {
                 padding-right: 20px;
@@ -138,7 +145,7 @@ function calcMeanStars(array $ratings) : float { // das Wort function
             <?php
             foreach ($allergens as $key => $value){
                 if($value != null){
-                    echo "<li>$value</li>";
+                    echo "<li>$value ($key)</li>";
                 }
             }
             ?>

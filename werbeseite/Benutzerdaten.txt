@@ -1,1 +1,1 @@
-vorname;email;sprache;datenschutz
+John;jp@g.com;de
