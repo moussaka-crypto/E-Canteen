@@ -207,6 +207,11 @@ if(isset($_POST[POST_PARAM_NEWS])){
             color: red;
             font-style: italic;
         }
+        .successful{
+            font-weight: bold;
+            color: green;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -312,6 +317,13 @@ if(isset($_POST[POST_PARAM_NEWS])){
                 </div>
             </fieldset>
         </form>
+        <p class = "successful">
+            <?php
+            if($valid) {
+                echo "DANKE :D!";
+            }
+            ?>
+        </p>
         <h2 id="wichtiges">Das ist uns wichtig...</h2>
         <ul id="endList">
             <li>Beste frische saisonale Zutaten</li>
