@@ -6,9 +6,10 @@
  */
 
 const GET_PARAM_SUCHEN = 'suche';
+$suche = $_GET[GET_PARAM_SUCHEN] ?? null;
 
 echo "<form method='get'>
-<input type='text' name = 'suche' value = " . $_GET[GET_PARAM_SUCHEN]. ">
+<input type='text' name = 'suche' value = " . $suche ." >
 <input type='submit' value='SEARCH'>
 </form> ";
 
@@ -28,7 +29,7 @@ while(!feof($search_word)){
 $words = explode(";", $line);
 
 for($find = 0; $find < count($words) - 1; $find++) {
-    if ($words[$find] == $_GET[GET_PARAM_SUCHEN]) {
+    if (!is_null($suche) && $words[$find] == $suche) {
 
         if($find % 2 == 0)
             echo $words[$find+1];
@@ -40,7 +41,7 @@ for($find = 0; $find < count($words) - 1; $find++) {
     }
 }
 
-if(!$exist){
+if(!$exist && !is_null($suche)){
     echo "Das gesuchte Wort " . "<em>" . $_GET[GET_PARAM_SUCHEN] . "</em>". " ist nicht enthalten";
 }
 
