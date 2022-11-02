@@ -34,14 +34,14 @@ for($find = 0; $find < count($words) - 1; $find++) {
             echo $words[$find+1];
         else
             echo $words[$find-1];
-        
+
         $exist = true;
+        break; // damit die Wörter, die gleich auf Deutsch und Englisch sind, nicht zweimal ausgegeben werden.
     }
 }
 
 if(!$exist){
-    echo "Das gesuchte Wort " . $_GET[GET_PARAM_SUCHEN] . " ist nicht enthalten";
+    echo "Das gesuchte Wort " . "<em>" . $_GET[GET_PARAM_SUCHEN] . "</em>". " ist nicht enthalten";
 }
 
 fclose($search_word);
-?>
