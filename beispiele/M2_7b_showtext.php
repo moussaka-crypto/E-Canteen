@@ -27,12 +27,18 @@ while(!feof($search_word)){
 
 $words = explode(";", $line);
 
-for($find = 0; $find < count($words) - 1; $find += 2) {
+for($find = 0; $find < count($words) - 1; $find++) {
     if ($words[$find] == $_GET[GET_PARAM_SUCHEN]) {
-        echo $words[$find + 1];
+
+        if($find % 2 == 0)
+            echo $words[$find+1];
+        else
+            echo $words[$find-1];
+        
         $exist = true;
     }
 }
+
 if(!$exist){
     echo "Das gesuchte Wort " . $_GET[GET_PARAM_SUCHEN] . " ist nicht enthalten";
 }
