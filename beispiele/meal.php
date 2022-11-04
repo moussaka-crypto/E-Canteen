@@ -155,6 +155,7 @@ function calcMeanStars(array $ratings) : float { // das Wort function
 
         <p class = "preis">Interner Preis: <?php echo number_format($meal["price_intern"],2,',');?>&euro;</p>
         <p class = "preis">Externer Preis: <?php echo number_format($meal["price_extern"],2,',');?>&euro;</p>
+        //numberFormater - formatCurrency
 
         <h1><?php
             if (!empty($_GET[GET_PARAM_LANG]) && $_GET[GET_PARAM_LANG] == "en")
@@ -173,7 +174,7 @@ function calcMeanStars(array $ratings) : float { // das Wort function
             } ?>: <?php echo calcMeanStars($ratings); ?>)</h1>
         <form method="get" action = "meal.php">
             <label for="search_text">Filter:</label>
-            <input id="search_text" type="text" name="search_text" value = "<?php echo $searchedItem ?>">
+            <input id="search_text" type="text" name="search_text" value = "<?php echo htmlentities($searchedItem); ?>">
             <input type="submit" value=<?php
             if (!empty($_GET[GET_PARAM_LANG]) && $_GET[GET_PARAM_LANG] == "en")
             {
