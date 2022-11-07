@@ -9,7 +9,7 @@ const GET_PARAM_SUCHEN = 'suche';
 $suche = $_GET[GET_PARAM_SUCHEN] ?? null;
 
 echo "<form method='get'>
-<input type='text' name = 'suche' value = ". $suche . ">
+<input type='text' name = 'suche' value = " . $suche ." >
 <input type='submit' value='SEARCH'>
 </form> ";
 
@@ -37,12 +37,11 @@ if(!is_null($suche)) {
             echo $line[$tupel][0];
             $exist = true;
         }
+
     }
 }
 
 if(!$exist && !is_null($suche)){
     echo "<p>Das gesuchte Wort<em> " . $suche . " </em>ist nicht enthalten</p>";
 }
-
 fclose($search_word);
-?>

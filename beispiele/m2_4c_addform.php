@@ -19,7 +19,7 @@ if(isset($_GET["A"]) && isset($_GET["B"]))
 <!DOCTYPE html>
 
 <head>
-    <title>Addition zweier Zahlen</title>
+    <title>Addition/Multiplikation</title>
     <meta charset="UTF-8">
 </head>
 <body>

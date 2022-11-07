@@ -153,6 +153,7 @@ function calcMeanStars(array $ratings) : float { // das Wort function
 
         <p class = "preis">Interner Preis: <?php echo number_format($meal["price_intern"],2,',');?>&euro;</p>
         <p class = "preis">Externer Preis: <?php echo number_format($meal["price_extern"],2,',');?>&euro;</p>
+        //numberFormater - formatCurrency
 
         <h1><?php
             if (!empty($_GET[GET_PARAM_LANG]) && $_GET[GET_PARAM_LANG] == "en")

@@ -170,7 +170,7 @@ include("Newsletteranmeldung.php");
                                 $p = "img/".$gerichte[$i][$j];
                                 echo '<td><img src="'; //source des Bilds
                                 echo $p; //Pfad zum Bild
-                                echo '"width=450px height=250px alt=gerichte></td>'; // Parameter
+                                echo '"width=260px height=160px alt=gerichte></td>'; // Parameter
                             }
                         }
                         echo '</tr>';
