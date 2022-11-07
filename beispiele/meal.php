@@ -122,7 +122,7 @@ function calcMeanStars(array $ratings) : float { // das Wort function
     </head>
     <body>
         <h1><?php
-            if ($_GET[GET_PARAM_LANG] == "en")
+            if (!empty($_GET[GET_PARAM_LANG]) && $_GET[GET_PARAM_LANG] == "en")
             {
                 echo $text_en["Gericht"];
             }
@@ -131,12 +131,12 @@ function calcMeanStars(array $ratings) : float { // das Wort function
             } ?> : <?php echo $meal['name']; ?></h1>
         <form method= "get" action = "meal.php">
         <select name = "sprache" onchange = "this.form.submit()">
-            <option value = "de"<?php if ($_GET[GET_PARAM_LANG] == "de") {echo "selected";} ?>>de</option>
-            <option value = "en"<?php if ($_GET[GET_PARAM_LANG] == "en") {echo "selected";} ?>>en</option>
+            <option value = "de"<?php if (!empty($_GET[GET_PARAM_LANG]) && $_GET[GET_PARAM_LANG] == "de") {echo "selected";} ?>>de</option>
+            <option value = "en"<?php if (!empty($_GET[GET_PARAM_LANG]) && $_GET[GET_PARAM_LANG] == "en") {echo "selected";} ?>>en</option>
         </select>
         </form>
         <p><?php
-            if($_GET[GET_PARAM_SHOW_DES] == 1){
+            if(!empty($_GET[GET_PARAM_SHOW_DES]) && $_GET[GET_PARAM_SHOW_DES] == 1){
                 echo $meal['description'];
             }
             ?>
@@ -155,14 +155,14 @@ function calcMeanStars(array $ratings) : float { // das Wort function
         <p class = "preis">Externer Preis: <?php echo number_format($meal["price_extern"],2,',');?>&euro;</p>
 
         <h1><?php
-            if ($_GET[GET_PARAM_LANG] == "en")
+            if (!empty($_GET[GET_PARAM_LANG]) && $_GET[GET_PARAM_LANG] == "en")
             {
                 echo $text_en["Bewertung"];
             }
             else {
                 echo $text_de["Bewertung"];
             } ?> (<?php
-            if ($_GET[GET_PARAM_LANG] == "en")
+            if (!empty($_GET[GET_PARAM_LANG]) && $_GET[GET_PARAM_LANG] == "en")
             {
                 echo $text_en["Insgesamt"];
             }
@@ -171,9 +171,9 @@ function calcMeanStars(array $ratings) : float { // das Wort function
             } ?>: <?php echo calcMeanStars($ratings); ?>)</h1>
         <form method="get" action = "meal.php">
             <label for="search_text">Filter:</label>
-            <input id="search_text" type="text" name="search_text" value = "<?php echo $searchedItem ?>">
+            <input id="search_text" type="text" name="search_text" value = "<?php echo htmlentities($searchedItem); ?>">
             <input type="submit" value=<?php
-            if ($_GET[GET_PARAM_LANG] == "en")
+            if (!empty($_GET[GET_PARAM_LANG]) && $_GET[GET_PARAM_LANG] == "en")
             {
                 echo $text_en["Suchen"];
             }
@@ -187,7 +187,7 @@ function calcMeanStars(array $ratings) : float { // das Wort function
             <tr>
                 <td>Text</td>
                 <td><?php
-                    if ($_GET[GET_PARAM_LANG] == "en")
+                    if (!empty($_GET[GET_PARAM_LANG]) && $_GET[GET_PARAM_LANG] == "en")
                     {
                         echo $text_en["Sterne"];
                     }
@@ -210,7 +210,7 @@ function calcMeanStars(array $ratings) : float { // das Wort function
         </table>
          <br>
          <?php
-        if ($_GET[GET_PARAM_TOP_OR_FLOP] == "TOP"){
+        if (!empty($_GET[GET_PARAM_TOP_OR_FLOP]) && $_GET[GET_PARAM_TOP_OR_FLOP] == "TOP"){
             $max = 0;
             foreach ($ratings as $rating){
                 if($rating['stars'] > $max)
@@ -219,7 +219,7 @@ function calcMeanStars(array $ratings) : float { // das Wort function
 
             echo "<strong>TOP</strong>";
             echo "<table>";
-            foreach ($showRatings as $rating) {
+            foreach ($ratings as $rating) {
 
                 if($rating['stars'] == $max) {
                     echo "
@@ -231,9 +231,9 @@ function calcMeanStars(array $ratings) : float { // das Wort function
             }
             echo "</table>";
         }
-        if ($_GET[GET_PARAM_TOP_OR_FLOP] == "FLOP"){
+        if (!empty($_GET[GET_PARAM_TOP_OR_FLOP]) && $_GET[GET_PARAM_TOP_OR_FLOP] == "FLOP"){
 
-            $min = 3000;
+            $min = PHP_INT_MAX;
             foreach ($ratings as $rating){
                 if($rating['stars'] < $min)
                     $min = $rating['stars'];
@@ -241,7 +241,7 @@ function calcMeanStars(array $ratings) : float { // das Wort function
 
             echo "<strong>FLOP</strong>";
             echo "<table>";
-            foreach ($showRatings as $rating) {
+            foreach ($ratings as $rating) {
 
                 if($rating['stars'] == $min) {
                     echo "

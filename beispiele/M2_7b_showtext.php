@@ -6,9 +6,10 @@
  */
 
 const GET_PARAM_SUCHEN = 'suche';
+$suche = $_GET[GET_PARAM_SUCHEN] ?? null;
 
 echo "<form method='get'>
-<input type='text' name = 'suche' value = " . $_GET[GET_PARAM_SUCHEN]. ">
+<input type='text' name = 'suche' value = ". $suche . ">
 <input type='submit' value='SEARCH'>
 </form> ";
 
@@ -18,23 +19,29 @@ if(!$search_word){
     die("Fehler beim Öffnen");
 }
 $words = [];
-$line = "";
+$line = [];
 $exist = false;
 
 while(!feof($search_word)){
-    $line = $line . trim(fgets($search_word,1024)).';';
+    $line [] = explode(";", trim(fgets($search_word,1024)));
 }
 
-$words = explode(";", $line);
-
-for($find = 0; $find < count($words) - 1; $find += 2) {
-    if ($words[$find] == $_GET[GET_PARAM_SUCHEN]) {
-        echo $words[$find + 1];
-        $exist = true;
+if(!is_null($suche)) {
+    for ($tupel = 0; $tupel < count($line); $tupel++) {
+        if ($suche == $line[$tupel][0]){
+            echo $line[$tupel][1];
+            $exist = true;
+            break;
+        }
+        else if($suche == $line[$tupel][1]){
+            echo $line[$tupel][0];
+            $exist = true;
+        }
     }
 }
-if(!$exist){
-    echo "Das gesuchte Wort " . $_GET[GET_PARAM_SUCHEN] . " ist nicht enthalten";
+
+if(!$exist && !is_null($suche)){
+    echo "<p>Das gesuchte Wort<em> " . $suche . " </em>ist nicht enthalten</p>";
 }
 
 fclose($search_word);
