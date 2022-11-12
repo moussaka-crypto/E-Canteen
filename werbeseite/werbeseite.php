@@ -4,7 +4,6 @@
  * Hristomir, Dimov, 3536320
  * Muhammad Zulfahmi, bin Zaid, 3520750
  */
-
 $database_connect = mysqli_connect("localhost", // Host der Datenbank
     "root",                 // Benutzername zur Anmeldung
     "dbwt",    // Passwort
@@ -16,6 +15,11 @@ if (!$database_connect) {
     echo "Verbindung fehlgeschlagen: ", mysqli_connect_error();
     exit();
 }
+
+$sql_update_besuch = "UPDATE zahlen SET besuche = besuche + 1";
+mysqli_query($database_connect,$sql_update_besuch);
+
+
 
 $sql_abfrage_0 = "SELECT id,name,preis_intern,preis_extern FROM gericht g ORDER BY RAND() LIMIT 5";
 $gericht_details = mysqli_query($database_connect, $sql_abfrage_0);
@@ -235,9 +239,21 @@ include("Newsletteranmeldung.php");
         <h2 id="zahlen">E-Mensa in Zahlen</h2>
         <table class="TheNumbersMasonWhatDoTheyMean">
             <tr>
-                <th>x</th> <th> Besuche</th>
-                <th>y</th> <th> Anmeldungen</th>
-                <th>z</th> <th> Speisen</th>
+                <th><?php
+                    $sql_abfrage_3 = "SELECT * FROM zahlen";
+                    $collect_anzahl = mysqli_query($database_connect, $sql_abfrage_3);
+                    $anzahl = mysqli_fetch_assoc($collect_anzahl);
+                    echo $anzahl['besuche'];
+                    ?>
+                </th> <th> Besuche</th>
+                <th><?php echo $anzahl['newsletteranmeldung']; ?></th> <th> Anmeldungen</th>
+                <th><?php
+                    $sql_abfrage_4 = "SELECT COUNT(name) as total FROM gericht";
+                    $collect_anzahl_g = mysqli_query($database_connect,$sql_abfrage_4);
+                    $anzahl_gericht = mysqli_fetch_assoc($collect_anzahl_g);
+                    echo $anzahl_gericht['total'];
+                    ?>
+                </th> <th> Speisen</th>
             </tr>
         </table>
         <br><br>
@@ -307,6 +323,8 @@ include("Newsletteranmeldung.php");
                 {
                     fwrite($file,$rName.';'.$rMail.';'.$sprache."\n");
                     echo "Anmeldung erfolgreich!";
+                    $sql_update_newsletter = "UPDATE zahlen SET newsletteranmeldung = newsletteranmeldung + 1";
+                    mysqli_query($database_connect, $sql_update_newsletter);
                 }
                 fclose($file);
             }
