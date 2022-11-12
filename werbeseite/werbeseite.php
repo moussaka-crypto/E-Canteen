@@ -5,6 +5,27 @@
  * Muhammad Zulfahmi, bin Zaid, 3520750
  */
 
+$database_connect = mysqli_connect("localhost", // Host der Datenbank
+    "root",                 // Benutzername zur Anmeldung
+    "dbwt",    // Passwort
+    "emensawerbeseite",     // Auswahl der Datenbanken (bzw. des Schemas)
+    3306 // optional port der Datenbank
+);
+
+if (!$database_connect) {
+    echo "Verbindung fehlgeschlagen: ", mysqli_connect_error();
+    exit();
+}
+
+$sql_abfrage_0 = "SELECT id,name,preis_intern,preis_extern FROM gericht g LIMIT 5";
+$gericht_details = mysqli_query($database_connect, $sql_abfrage_0);
+
+$sql_abfrage_1 = "SELECT gericht_id,code FROM gericht_hat_allergen";
+$ga_details = mysqli_query($database_connect, $sql_abfrage_1);
+
+$sql_abfrage_2 = "SELECT code, name FROM allergen";
+$allergen_details = mysqli_query($database_connect,$sql_abfrage_2);
+
 include("Newsletteranmeldung.php");
 ?>
 <!DOCTYPE html>
@@ -65,7 +86,8 @@ include("Newsletteranmeldung.php");
             grid-column-end: 4;
         }
         .Food, .TheNumbersMasonWhatDoTheyMean{
-            width: 90%
+            width: 90%;
+            margin: auto;
         }
         .end{
             text-align: center;
@@ -114,6 +136,12 @@ include("Newsletteranmeldung.php");
             font-size: 22px;
             color:darkred;
         }
+        td {
+            border: 1px solid black;
+        }
+        th{
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body>
@@ -150,9 +178,10 @@ include("Newsletteranmeldung.php");
 
         <table class="Food">
             <tr>
-                <td></td>
-                <td>Preis intern</td>
-                <td>Preis extern</td>
+                <th>Gericht</th>
+                <th>Preis intern</th>
+                <th>Preis extern</th>
+                <th>Bild</th>
             </tr>
 
                 <?php //here i guess
@@ -176,8 +205,30 @@ include("Newsletteranmeldung.php");
                         echo '</tr>';
                     }
                 }
+
+                while($row = mysqli_fetch_assoc($gericht_details)){
+                 echo '<tr>'.
+                      '<td>',$row['name'],'<ul>';
+                    while ($check_allergen = mysqli_fetch_assoc($ga_details)){
+                        if($check_allergen['gericht_id'] == $row['id']){
+                            echo '<li>',$check_allergen['code'],'</li>';
+                        }
+                    }
+                    echo '</ul>','</td>';
+                 echo '<td>',$row['preis_intern'],'</td>',
+                      '<td>',$row['preis_extern'],'</td>',
+                      '</tr>';
+                }
                 ?>
             </table>
+
+        <?php
+            echo "<ul>";
+            while($row = mysqli_fetch_assoc($allergen_details)) {
+            echo '<li>' . $row['code'] . "--" . $row['name'] . '</li>';
+            }
+        echo "</ul>";
+        ?>
 
         <h2 id="zahlen">E-Mensa in Zahlen</h2>
         <table class="TheNumbersMasonWhatDoTheyMean">
