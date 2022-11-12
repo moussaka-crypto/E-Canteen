@@ -17,11 +17,12 @@ if (!$database_connect) {
     exit();
 }
 
-$sql_abfrage_0 = "SELECT id,name,preis_intern,preis_extern FROM gericht g LIMIT 5";
+$sql_abfrage_0 = "SELECT id,name,preis_intern,preis_extern FROM gericht g ORDER BY RAND() LIMIT 5";
 $gericht_details = mysqli_query($database_connect, $sql_abfrage_0);
 
-$sql_abfrage_1 = "SELECT gericht_id,code FROM gericht_hat_allergen";
-$ga_details = mysqli_query($database_connect, $sql_abfrage_1);
+$sql_abfrage_1 = "SELECT gericht_id, GROUP_CONCAT(code) as allergens
+                  FROM gericht_hat_allergen
+                  GROUP BY gericht_id;";
 
 $sql_abfrage_2 = "SELECT code, name FROM allergen";
 $allergen_details = mysqli_query($database_connect,$sql_abfrage_2);
@@ -207,14 +208,15 @@ include("Newsletteranmeldung.php");
                 }
 
                 while($row = mysqli_fetch_assoc($gericht_details)){
-                 echo '<tr>'.
-                      '<td>',$row['name'],'<ul>';
+                    echo '<tr>'.
+                        '<td>',$row['name'];
+                    $ga_details = mysqli_query($database_connect, $sql_abfrage_1);
                     while ($check_allergen = mysqli_fetch_assoc($ga_details)){
                         if($check_allergen['gericht_id'] == $row['id']){
-                            echo '<li>',$check_allergen['code'],'</li>';
+                            echo '<p>Allergene: ',$check_allergen['allergens'],'</p>';
                         }
                     }
-                    echo '</ul>','</td>';
+                    echo '</td>';
                  echo '<td>',$row['preis_intern'],'</td>',
                       '<td>',$row['preis_extern'],'</td>',
                       '</tr>';
