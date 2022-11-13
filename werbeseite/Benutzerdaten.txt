@@ -1,2 +1,6 @@
+<<<<<<< main
 John;price141@taskforce.com;en
 fd;fd@l.com;de
+=======
+Soap;soap141@taskforce.com;de
+>>>>>>> pass change (nur für mich) + paar Sachen
