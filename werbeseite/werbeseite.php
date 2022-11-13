@@ -6,7 +6,11 @@
  */
 $database_connect = mysqli_connect("localhost", // Host der Datenbank
     "root",                 // Benutzername zur Anmeldung
+<<<<<<< main
     "root",                 // Passwort, ja ich weiss es ist unsicher
+=======
+    "root",                 // Passwort
+>>>>>>> pass change (nur für mich) + paar Sachen
     "emensawerbeseite",     // Auswahl der Datenbanken (bzw. des Schemas)
     3306 // optional port der Datenbank
 );
@@ -16,7 +20,15 @@ if (!$database_connect) {
     exit();
 }
 
+<<<<<<< main
 $sql_abfrage_0 = "SELECT id,name,preis_intern,preis_extern FROM gericht g ORDER BY RAND() LIMIT 5";
+=======
+$sql_update_besuch = "UPDATE zahlen SET besuche = besuche + 1";
+mysqli_query($database_connect,$sql_update_besuch);
+
+
+$sql_abfrage_0 = "SELECT id,name,preis_intern,preis_extern FROM gericht g ORDER BY name LIMIT 5";
+>>>>>>> pass change (nur für mich) + paar Sachen
 $gericht_details = mysqli_query($database_connect, $sql_abfrage_0);
 
 $sql_abfrage_1 = "SELECT gericht_id, GROUP_CONCAT(code) as allergens
@@ -206,13 +218,13 @@ include("Newsletteranmeldung.php");
                     }
                 }
 
-                while($row = mysqli_fetch_assoc($gericht_details)){
+                while($row = mysqli_fetch_assoc($gericht_details)){ // Allergene unter Gericht
                     echo '<tr>'.
-                        '<td>',$row['name'];
+                        '<td>', $row['name'];
                     $ga_details = mysqli_query($database_connect, $sql_abfrage_1);
                     while ($check_allergen = mysqli_fetch_assoc($ga_details)){
                         if($check_allergen['gericht_id'] == $row['id']){
-                            echo '<p>Allergene: ',$check_allergen['allergens'],'</p>';
+                            echo '<p><em><b>Allergene:</b> ', $check_allergen['allergens'], '</em></p>';
                         }
                     }
                     echo '</td>';
@@ -222,8 +234,7 @@ include("Newsletteranmeldung.php");
                 }
                 ?>
             </table>
-
-        <?php
+        <?php // Liste mit Allergenen
             echo "<ul>";
             while($row = mysqli_fetch_assoc($allergen_details)) {
             echo '<li>' . $row['code'] . "--" . $row['name'] . '</li>';
@@ -232,6 +243,7 @@ include("Newsletteranmeldung.php");
         ?>
         <h2 id="zahlen">E-Mensa in Zahlen</h2>
         <table class="TheNumbersMasonWhatDoTheyMean">
+<<<<<<< main
             <tr>
                 <td><?php
                     if(!file_exists("besuche.txt"))
@@ -252,6 +264,23 @@ include("Newsletteranmeldung.php");
                         fwrite($visitfile,$visits);
                         fclose($visitfile);
                     }
+=======
+           <tr>
+                <th><?php
+                    $sql_abfrage_3 = "SELECT * FROM zahlen";
+                    $collect_anzahl = mysqli_query($database_connect, $sql_abfrage_3);
+                    $anzahl = mysqli_fetch_assoc($collect_anzahl);
+                    echo $anzahl['besuche'] ?? 0;
+                    ?>
+                </th>
+               <th> Besuche</th>
+                <th><?php echo $anzahl['newsletteranmeldung'] ?? 0; ?></th> <th> Anmeldungen</th>
+                <th><?php
+                    $sql_abfrage_4 = "SELECT COUNT(name) as total FROM gericht";
+                    $collect_anzahl_g = mysqli_query($database_connect,$sql_abfrage_4);
+                    $anzahl_gericht = mysqli_fetch_assoc($collect_anzahl_g);
+                    echo $anzahl_gericht['total'];
+>>>>>>> pass change (nur für mich) + paar Sachen
                     ?>
                 </th> <th> Besuche</th>
                 <p class = "vibeCheck">
