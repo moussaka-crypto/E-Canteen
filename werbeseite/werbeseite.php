@@ -6,7 +6,7 @@
  */
 $database_connect = mysqli_connect("localhost", // Host der Datenbank
     "root",                 // Benutzername zur Anmeldung
-    "dbwt",    // Passwort
+    "root",                 // Passwort, ja ich weiss es ist unsicher
     "emensawerbeseite",     // Auswahl der Datenbanken (bzw. des Schemas)
     3306 // optional port der Datenbank
 );
@@ -15,11 +15,6 @@ if (!$database_connect) {
     echo "Verbindung fehlgeschlagen: ", mysqli_connect_error();
     exit();
 }
-
-$sql_update_besuch = "UPDATE zahlen SET besuche = besuche + 1";
-mysqli_query($database_connect,$sql_update_besuch);
-
-
 
 $sql_abfrage_0 = "SELECT id,name,preis_intern,preis_extern FROM gericht g ORDER BY RAND() LIMIT 5";
 $gericht_details = mysqli_query($database_connect, $sql_abfrage_0);
@@ -238,11 +233,25 @@ include("Newsletteranmeldung.php");
         <h2 id="zahlen">E-Mensa in Zahlen</h2>
         <table class="TheNumbersMasonWhatDoTheyMean">
             <tr>
-                <th><?php
-                    $sql_abfrage_3 = "SELECT * FROM zahlen";
-                    $collect_anzahl = mysqli_query($database_connect, $sql_abfrage_3);
-                    $anzahl = mysqli_fetch_assoc($collect_anzahl);
-                    echo $anzahl['besuche'];
+                <td><?php
+                    if(!file_exists("besuche.txt"))
+                    {
+                        echo "1";
+                        $visitfile = fopen('besuche.txt', 'w');
+                        fwrite($visitfile,1);
+                        fclose($visitfile);
+                    }
+                    else{
+                        $visitfile = fopen('besuche.txt', 'r');
+                        $visits = fgets($visitfile,1024);
+                        echo $visits;
+                        fclose($visitfile);
+
+                        $visits++;
+                        $visitfile = fopen('besuche.txt','w');
+                        fwrite($visitfile,$visits);
+                        fclose($visitfile);
+                    }
                     ?>
                 </th> <th> Besuche</th>
                 <p class = "vibeCheck">
