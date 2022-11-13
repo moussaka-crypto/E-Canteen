@@ -6,7 +6,7 @@
  */
 $database_connect = mysqli_connect("localhost", // Host der Datenbank
     "root",                 // Benutzername zur Anmeldung
-    "dbwt",    // Passwort
+    "root",                 // Passwort, ja ich weiss es ist unsicher
     "emensawerbeseite",     // Auswahl der Datenbanken (bzw. des Schemas)
     3306 // optional port der Datenbank
 );
@@ -15,11 +15,6 @@ if (!$database_connect) {
     echo "Verbindung fehlgeschlagen: ", mysqli_connect_error();
     exit();
 }
-
-$sql_update_besuch = "UPDATE zahlen SET besuche = besuche + 1";
-mysqli_query($database_connect,$sql_update_besuch);
-
-
 
 $sql_abfrage_0 = "SELECT id,name,preis_intern,preis_extern FROM gericht g ORDER BY RAND() LIMIT 5";
 $gericht_details = mysqli_query($database_connect, $sql_abfrage_0);
@@ -239,21 +234,40 @@ include("Newsletteranmeldung.php");
         <h2 id="zahlen">E-Mensa in Zahlen</h2>
         <table class="TheNumbersMasonWhatDoTheyMean">
             <tr>
-                <th><?php
-                    $sql_abfrage_3 = "SELECT * FROM zahlen";
-                    $collect_anzahl = mysqli_query($database_connect, $sql_abfrage_3);
-                    $anzahl = mysqli_fetch_assoc($collect_anzahl);
-                    echo $anzahl['besuche'];
+                <td><?php
+                    if(!file_exists("besuche.txt"))
+                    {
+                        echo "1";
+                        $visitfile = fopen('besuche.txt', 'w');
+                        fwrite($visitfile,1);
+                        fclose($visitfile);
+                    }
+                    else{
+                        $visitfile = fopen('besuche.txt', 'r');
+                        $visits = fgets($visitfile,1024);
+                        echo $visits;
+                        fclose($visitfile);
+
+                        $visits++;
+                        $visitfile = fopen('besuche.txt','w');
+                        fwrite($visitfile,$visits);
+                        fclose($visitfile);
+                    }
                     ?>
-                </th> <th> Besuche</th>
-                <th><?php echo $anzahl['newsletteranmeldung']; ?></th> <th> Anmeldungen</th>
-                <th><?php
-                    $sql_abfrage_4 = "SELECT COUNT(name) as total FROM gericht";
-                    $collect_anzahl_g = mysqli_query($database_connect,$sql_abfrage_4);
-                    $anzahl_gericht = mysqli_fetch_assoc($collect_anzahl_g);
-                    echo $anzahl_gericht['total'];
-                    ?>
-                </th> <th> Speisen</th>
+                </td> <td> Besuche</td>
+
+                <td><?php
+                    $anmeldungCounnter = -1;
+                    $data = file_get_contents('Benutzerdaten.txt');
+                    foreach (preg_split("/((\r?\n)|(\r\n?))/", $data, ) as $line){
+                        $anmeldungCounnter++;
+                    }
+                    echo $anmeldungCounnter;
+                    $anmeldungCounnter = 0;
+                    ?></td>
+                <td> Anmeldungen</td>
+                <td> 9 </td>
+                <td> Speisen</td>
             </tr>
         </table>
         <br><br>
@@ -323,8 +337,6 @@ include("Newsletteranmeldung.php");
                 {
                     fwrite($file,$rName.';'.$rMail.';'.$sprache."\n");
                     echo "Anmeldung erfolgreich!";
-                    $sql_update_newsletter = "UPDATE zahlen SET newsletteranmeldung = newsletteranmeldung + 1";
-                    mysqli_query($database_connect, $sql_update_newsletter);
                 }
                 fclose($file);
             }
