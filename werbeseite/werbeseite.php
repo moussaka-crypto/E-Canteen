@@ -6,11 +6,7 @@
  */
 $database_connect = mysqli_connect("localhost", // Host der Datenbank
     "root",                 // Benutzername zur Anmeldung
-<<<<<<< main
     "root",                 // Passwort, ja ich weiss es ist unsicher
-=======
-    "root",                 // Passwort
->>>>>>> pass change (nur für mich) + paar Sachen
     "emensawerbeseite",     // Auswahl der Datenbanken (bzw. des Schemas)
     3306 // optional port der Datenbank
 );
@@ -20,15 +16,7 @@ if (!$database_connect) {
     exit();
 }
 
-<<<<<<< main
 $sql_abfrage_0 = "SELECT id,name,preis_intern,preis_extern FROM gericht g ORDER BY RAND() LIMIT 5";
-=======
-$sql_update_besuch = "UPDATE zahlen SET besuche = besuche + 1";
-mysqli_query($database_connect,$sql_update_besuch);
-
-
-$sql_abfrage_0 = "SELECT id,name,preis_intern,preis_extern FROM gericht g ORDER BY name LIMIT 5";
->>>>>>> pass change (nur für mich) + paar Sachen
 $gericht_details = mysqli_query($database_connect, $sql_abfrage_0);
 
 $sql_abfrage_1 = "SELECT gericht_id, GROUP_CONCAT(code) as allergens
@@ -73,7 +61,7 @@ include("Newsletteranmeldung.php");
             font-size: 20px;
         }
         .Header2 > a{
-           margin-right: 30px;
+            margin-right: 30px;
             font-size: 22px;
             text-decoration: none;
         }
@@ -165,11 +153,11 @@ include("Newsletteranmeldung.php");
     </div>
 
     <div class="Header2">
-    <a href="#ank">Ank&uuml;ndigung</a>
-    <a href="#speisen">Speisen</a>
-    <a href="#zahlen">Zahlen</a>
-    <a href="#kontakt">Kontakt</a>
-    <a href="#wichtiges">Wichtig f&uuml;r uns</a>
+        <a href="#ank">Ank&uuml;ndigung</a>
+        <a href="#speisen">Speisen</a>
+        <a href="#zahlen">Zahlen</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#wichtiges">Wichtig f&uuml;r uns</a>
     </div>
 
     <div class="Empty">
@@ -196,55 +184,55 @@ include("Newsletteranmeldung.php");
                 <th>Bild</th>
             </tr>
 
-                <?php //here i guess
-                include ('gerichte.php');
-                if(isset($gerichte))
-                {
-                    for($i = 0; $i < count($gerichte); $i++){
-                        echo '<tr>';
-                        for($j = 0; $j < count($gerichte[$i]); $j++)
-                        {
-                            if($j!=count($gerichte[$i])-1)
-                                echo '<td>'.$gerichte[$i][$j].'</td>';
-                            else
-                            {   //letztes Element ist das Bild
-                                $p = "img/".$gerichte[$i][$j];
-                                echo '<td><img src="'; //source des Bilds
-                                echo $p; //Pfad zum Bild
-                                echo '"width=260px height=160px alt=gerichte></td>'; // Parameter
-                            }
-                        }
-                        echo '</tr>';
-                    }
-                }
-
-                while($row = mysqli_fetch_assoc($gericht_details)){ // Allergene unter Gericht
-                    echo '<tr>'.
-                        '<td>', $row['name'];
-                    $ga_details = mysqli_query($database_connect, $sql_abfrage_1);
-                    while ($check_allergen = mysqli_fetch_assoc($ga_details)){
-                        if($check_allergen['gericht_id'] == $row['id']){
-                            echo '<p><em><b>Allergene:</b> ', $check_allergen['allergens'], '</em></p>';
+            <?php //here i guess
+            include ('gerichte.php');
+            if(isset($gerichte))
+            {
+                for($i = 0; $i < count($gerichte); $i++){
+                    echo '<tr>';
+                    for($j = 0; $j < count($gerichte[$i]); $j++)
+                    {
+                        if($j!=count($gerichte[$i])-1)
+                            echo '<td>'.$gerichte[$i][$j].'</td>';
+                        else
+                        {   //letztes Element ist das Bild
+                            $p = "img/".$gerichte[$i][$j];
+                            echo '<td><img src="'; //source des Bilds
+                            echo $p; //Pfad zum Bild
+                            echo '"width=260px height=160px alt=gerichte></td>'; // Parameter
                         }
                     }
-                    echo '</td>';
-                 echo '<td>',$row['preis_intern'],'</td>',
-                      '<td>',$row['preis_extern'],'</td>',
-                      '</tr>';
+                    echo '</tr>';
                 }
-                ?>
-            </table>
-        <?php // Liste mit Allergenen
-            echo "<ul>";
-            while($row = mysqli_fetch_assoc($allergen_details)) {
-            echo '<li>' . $row['code'] . "--" . $row['name'] . '</li>';
             }
+
+            while($row = mysqli_fetch_assoc($gericht_details)){
+                echo '<tr>'.
+                    '<td>',$row['name'];
+                $ga_details = mysqli_query($database_connect, $sql_abfrage_1);
+                while ($check_allergen = mysqli_fetch_assoc($ga_details)){
+                    if($check_allergen['gericht_id'] == $row['id']){
+                        echo '<p>Allergene: ',$check_allergen['allergens'],'</p>';
+                    }
+                }
+                echo '</td>';
+                echo '<td>',$row['preis_intern'],'</td>',
+                '<td>',$row['preis_extern'],'</td>',
+                '</tr>';
+            }
+            ?>
+        </table>
+
+        <?php
+        echo "<ul>";
+        while($row = mysqli_fetch_assoc($allergen_details)) {
+            echo '<li>' . $row['code'] . "--" . $row['name'] . '</li>';
+        }
         echo "</ul>";
         ?>
 
         <h2 id="zahlen">E-Mensa in Zahlen</h2>
         <table class="TheNumbersMasonWhatDoTheyMean">
-<<<<<<< main
             <tr>
                 <td><?php
                     if(!file_exists("besuche.txt"))
@@ -265,23 +253,6 @@ include("Newsletteranmeldung.php");
                         fwrite($visitfile,$visits);
                         fclose($visitfile);
                     }
-=======
-           <tr>
-                <th><?php
-                    $sql_abfrage_3 = "SELECT * FROM zahlen";
-                    $collect_anzahl = mysqli_query($database_connect, $sql_abfrage_3);
-                    $anzahl = mysqli_fetch_assoc($collect_anzahl);
-                    echo $anzahl['besuche'] ?? 0;
-                    ?>
-                </th>
-               <th> Besuche</th>
-                <th><?php echo $anzahl['newsletteranmeldung'] ?? 0; ?></th> <th> Anmeldungen</th>
-                <th><?php
-                    $sql_abfrage_4 = "SELECT COUNT(name) as total FROM gericht";
-                    $collect_anzahl_g = mysqli_query($database_connect,$sql_abfrage_4);
-                    $anzahl_gericht = mysqli_fetch_assoc($collect_anzahl_g);
-                    echo $anzahl_gericht['total'];
->>>>>>> pass change (nur für mich) + paar Sachen
                     ?>
                 </td> <td> Besuche</td>
 
@@ -326,7 +297,7 @@ include("Newsletteranmeldung.php");
                     <label for="email">Ihre E-mail:</label>
                     <input name = "email" type="email" size="10" id="email" required>
                 </p>
-                
+
                 <label for="newsletterLang">Newsletter bitte in:</label>
                 <select name="newsletterSprache" id="newsletterLang">
                     <option value="de">Deutsch</option>
