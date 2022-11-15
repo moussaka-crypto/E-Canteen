@@ -6,7 +6,7 @@
  */
 $database_connect = mysqli_connect("localhost", // Host der Datenbank
     "root",                 // Benutzername zur Anmeldung
-    "root",                 // Passwort, ja ich weiss es ist unsicher
+    "root",                 // Passwort, ja ich weiß, es ist unsicher
     "emensawerbeseite",     // Auswahl der Datenbanken (bzw. des Schemas)
     3306 // optional port der Datenbank
 );
@@ -240,7 +240,6 @@ include("Newsletteranmeldung.php");
                         echo "1";
                         $visitfile = fopen('besuche.txt', 'w');
                         fwrite($visitfile,1);
-                        fclose($visitfile);
                     }
                     else{
                         $visitfile = fopen('besuche.txt', 'r');
@@ -248,22 +247,58 @@ include("Newsletteranmeldung.php");
                         echo $visits;
                         fclose($visitfile);
 
-                        $visits++;
+                        $visits++; // wird nur bei Neuladen inkrementiert werden
                         $visitfile = fopen('besuche.txt','w');
                         fwrite($visitfile,$visits);
-                        fclose($visitfile);
                     }
+                    fclose($visitfile);
                     ?>
                 </td> <td> Besuche</td>
+                <p class = "vibeCheck">
+                    <?php
+                    $rName = "";
+                    $rMail = "";
+                    $sprache = "";
 
-                <td><?php
-                    $anmeldungCounnter = -1;
-                    $data = file_get_contents('Benutzerdaten.txt');
-                    foreach (preg_split("/((\r?\n)|(\r\n?))/", $data, ) as $line){
-                        $anmeldungCounnter++;
+                    if(isset($_POST["vorname"], $_POST["email"],$_POST["newsletterSprache"]))
+                    {
+                        $rName = checkName($_POST["vorname"]);
+                        $rMail = checkMail($_POST["email"]);
+                        $sprache = $_POST["newsletterSprache"];
                     }
-                    echo $anmeldungCounnter;
-                    $anmeldungCounnter = 0;
+                    ?>
+                </p>
+                <?php
+
+                $exist = false;
+                $userdata  = $rName.';'.$rMail.';'.$sprache."\n";
+                $filecheck = fopen("Benutzerdaten.txt", 'r');
+                while(!feof($filecheck))
+                {
+                    if($userdata == fgets($filecheck)) {
+                        $exist = true;
+                        echo "Wurde schon gespeichert!";
+                        break;
+                    }
+                }
+                fclose($filecheck);
+                ?>
+                <p class = "succ">
+                    <?php
+                    if(!$exist)
+                    {
+                        $file = fopen('Benutzerdaten.txt','a');
+
+                        if(isset($rName, $rMail,$sprache) && $userdata != ";;"."\n")
+                        {
+                            fwrite($file,$rName.';'.$rMail.';'.$sprache."\n");
+                            echo "Anmeldung erfolgreich!";
+                        }
+                        fclose($file);
+                    }
+                    ?>
+                </p>
+                <td><?php echo anmHoch();
                     ?></td>
                 <td> Anmeldungen</td>
                 <td> 9 </td>
@@ -272,20 +307,7 @@ include("Newsletteranmeldung.php");
         </table>
         <br><br>
         <h2 id="kontakt">Interesse geweckt? Wir informieren Sie!</h2>
-        <p class = "vibeCheck">
-            <?php
-            $rName = "";
-            $rMail = "";
-            $sprache = "";
 
-            if(isset($_POST["vorname"], $_POST["email"],$_POST["newsletterSprache"]))
-            {
-                $rName = checkName($_POST["vorname"]);
-                $rMail = checkMail($_POST["email"]);
-                $sprache = $_POST["newsletterSprache"];
-            }
-            ?>
-        </p>
         <form method="post" action="">
             <fieldset>
                 <p>
@@ -312,36 +334,7 @@ include("Newsletteranmeldung.php");
                 </div>
             </fieldset>
         </form>
-        <?php
 
-        $exist = false;
-        $userdata  = $rName.';'.$rMail.';'.$sprache."\n";
-        $filecheck = fopen("Benutzerdaten.txt", 'r');
-        while(!feof($filecheck))
-        {
-            if($userdata == fgets($filecheck)) {
-                $exist = true;
-                echo "Wurde schon gespeichert!";
-                break;
-            }
-        }
-        fclose($filecheck);
-        ?>
-        <p class = "succ">
-            <?php
-            if(!$exist)
-            {
-                $file = fopen('Benutzerdaten.txt','a');
-
-                if(isset($rName, $rMail,$sprache) && $userdata != ";;"."\n")
-                {
-                    fwrite($file,$rName.';'.$rMail.';'.$sprache."\n");
-                    echo "Anmeldung erfolgreich!";
-                }
-                fclose($file);
-            }
-            ?>
-        </p>
         <h2 id="wichtiges">Das ist uns wichtig...</h2>
         <ul id="endList">
             <li>Beste frische saisonale Zutaten</li>
@@ -359,6 +352,18 @@ include("Newsletteranmeldung.php");
         </footer>
     </div>
     <div class="Empty1"></div>
+    <?php
+    function anmHoch() : int
+    {
+        $anmeldungCounnter = -1;
+        $data = file_get_contents('Benutzerdaten.txt');
+        foreach (preg_split("/((\r?\n)|(\r\n?))/", $data) as $ignored){
+            $anmeldungCounnter++;
+        }
+        return $anmeldungCounnter;
+        //$anmeldungCounnter = 0;
+    }
+    ?>
 </div>
 </body>
 </html>
