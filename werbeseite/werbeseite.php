@@ -6,7 +6,7 @@
  */
 $database_connect = mysqli_connect("localhost", // Host der Datenbank
     "root",                 // Benutzername zur Anmeldung
-    "root",                 // Passwort, ja ich weiss es ist unsicher
+    "root",                 // Passwort, ja ich weiß, es ist unsicher
     "emensawerbeseite",     // Auswahl der Datenbanken (bzw. des Schemas)
     3306 // optional port der Datenbank
 );
@@ -239,7 +239,6 @@ include("Newsletteranmeldung.php");
                         echo "1";
                         $visitfile = fopen('besuche.txt', 'w');
                         fwrite($visitfile,1);
-                        fclose($visitfile);
                     }
                     else{
                         $visitfile = fopen('besuche.txt', 'r');
@@ -247,11 +246,11 @@ include("Newsletteranmeldung.php");
                         echo $visits;
                         fclose($visitfile);
 
-                        $visits++;
+                        $visits++; // wird nur bei Neuladen inkrementiert werden
                         $visitfile = fopen('besuche.txt','w');
                         fwrite($visitfile,$visits);
-                        fclose($visitfile);
                     }
+                    fclose($visitfile);
                     ?>
                 </th> <th> Besuche</th>
                 <p class = "vibeCheck">
@@ -359,6 +358,18 @@ include("Newsletteranmeldung.php");
         </footer>
     </div>
     <div class="Empty1"></div>
+    <?php
+    function anmHoch() : int
+    {
+        $anmeldungCounnter = -1;
+        $data = file_get_contents('Benutzerdaten.txt');
+        foreach (preg_split("/((\r?\n)|(\r\n?))/", $data) as $ignored){
+            $anmeldungCounnter++;
+        }
+        return $anmeldungCounnter;
+        //$anmeldungCounnter = 0;
+    }
+    ?>
 </div>
 </body>
 </html>
