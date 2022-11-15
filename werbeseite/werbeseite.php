@@ -6,7 +6,7 @@
  */
 $database_connect = mysqli_connect("localhost", // Host der Datenbank
     "root",                 // Benutzername zur Anmeldung
-    "root",                 // Passwort, ja ich weiss es ist unsicher
+    "root",                 // Passwort, ja ich weiß, es ist unsicher
     "emensawerbeseite",     // Auswahl der Datenbanken (bzw. des Schemas)
     3306 // optional port der Datenbank
 );
@@ -61,7 +61,7 @@ include("Newsletteranmeldung.php");
             font-size: 20px;
         }
         .Header2 > a{
-           margin-right: 30px;
+            margin-right: 30px;
             font-size: 22px;
             text-decoration: none;
         }
@@ -153,11 +153,11 @@ include("Newsletteranmeldung.php");
     </div>
 
     <div class="Header2">
-    <a href="#ank">Ank&uuml;ndigung</a>
-    <a href="#speisen">Speisen</a>
-    <a href="#zahlen">Zahlen</a>
-    <a href="#kontakt">Kontakt</a>
-    <a href="#wichtiges">Wichtig f&uuml;r uns</a>
+        <a href="#ank">Ank&uuml;ndigung</a>
+        <a href="#speisen">Speisen</a>
+        <a href="#zahlen">Zahlen</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#wichtiges">Wichtig f&uuml;r uns</a>
     </div>
 
     <div class="Empty">
@@ -184,50 +184,50 @@ include("Newsletteranmeldung.php");
                 <th>Bild</th>
             </tr>
 
-                <?php //here i guess
-                include ('gerichte.php');
-                if(isset($gerichte))
-                {
-                    for($i = 0; $i < count($gerichte); $i++){
-                        echo '<tr>';
-                        for($j = 0; $j < count($gerichte[$i]); $j++)
-                        {
-                            if($j!=count($gerichte[$i])-1)
-                                echo '<td>'.$gerichte[$i][$j].'</td>';
-                            else
-                            {   //letztes Element ist das Bild
-                                $p = "img/".$gerichte[$i][$j];
-                                echo '<td><img src="'; //source des Bilds
-                                echo $p; //Pfad zum Bild
-                                echo '"width=260px height=160px alt=gerichte></td>'; // Parameter
-                            }
+            <?php //here i guess
+            include ('gerichte.php');
+            if(isset($gerichte))
+            {
+                for($i = 0; $i < count($gerichte); $i++){
+                    echo '<tr>';
+                    for($j = 0; $j < count($gerichte[$i]); $j++)
+                    {
+                        if($j!=count($gerichte[$i])-1)
+                            echo '<td>'.$gerichte[$i][$j].'</td>';
+                        else
+                        {   //letztes Element ist das Bild
+                            $p = "img/".$gerichte[$i][$j];
+                            echo '<td><img src="'; //source des Bilds
+                            echo $p; //Pfad zum Bild
+                            echo '"width=260px height=160px alt=gerichte></td>'; // Parameter
                         }
-                        echo '</tr>';
                     }
+                    echo '</tr>';
                 }
+            }
 
-                while($row = mysqli_fetch_assoc($gericht_details)){
-                    echo '<tr>'.
-                        '<td>',$row['name'];
-                    $ga_details = mysqli_query($database_connect, $sql_abfrage_1);
-                    while ($check_allergen = mysqli_fetch_assoc($ga_details)){
-                        if($check_allergen['gericht_id'] == $row['id']){
-                            echo '<p>Allergene: ',$check_allergen['allergens'],'</p>';
-                        }
+            while($row = mysqli_fetch_assoc($gericht_details)){
+                echo '<tr>'.
+                    '<td>',$row['name'];
+                $ga_details = mysqli_query($database_connect, $sql_abfrage_1);
+                while ($check_allergen = mysqli_fetch_assoc($ga_details)){
+                    if($check_allergen['gericht_id'] == $row['id']){
+                        echo '<p>Allergene: ',$check_allergen['allergens'],'</p>';
                     }
-                    echo '</td>';
-                 echo '<td>',$row['preis_intern'],'</td>',
-                      '<td>',$row['preis_extern'],'</td>',
-                      '</tr>';
                 }
-                ?>
-            </table>
+                echo '</td>';
+                echo '<td>',$row['preis_intern'],'</td>',
+                '<td>',$row['preis_extern'],'</td>',
+                '</tr>';
+            }
+            ?>
+        </table>
 
         <?php
-            echo "<ul>";
-            while($row = mysqli_fetch_assoc($allergen_details)) {
+        echo "<ul>";
+        while($row = mysqli_fetch_assoc($allergen_details)) {
             echo '<li>' . $row['code'] . "--" . $row['name'] . '</li>';
-            }
+        }
         echo "</ul>";
         ?>
 
@@ -240,7 +240,6 @@ include("Newsletteranmeldung.php");
                         echo "1";
                         $visitfile = fopen('besuche.txt', 'w');
                         fwrite($visitfile,1);
-                        fclose($visitfile);
                     }
                     else{
                         $visitfile = fopen('besuche.txt', 'r');
@@ -248,22 +247,58 @@ include("Newsletteranmeldung.php");
                         echo $visits;
                         fclose($visitfile);
 
-                        $visits++;
+                        $visits++; // wird nur bei Neuladen inkrementiert werden
                         $visitfile = fopen('besuche.txt','w');
                         fwrite($visitfile,$visits);
-                        fclose($visitfile);
                     }
+                    fclose($visitfile);
                     ?>
                 </td> <td> Besuche</td>
+                <p class = "vibeCheck">
+                    <?php
+                    $rName = "";
+                    $rMail = "";
+                    $sprache = "";
 
-                <td><?php
-                    $anmeldungCounnter = -1;
-                    $data = file_get_contents('Benutzerdaten.txt');
-                    foreach (preg_split("/((\r?\n)|(\r\n?))/", $data, ) as $line){
-                        $anmeldungCounnter++;
+                    if(isset($_POST["vorname"], $_POST["email"],$_POST["newsletterSprache"]))
+                    {
+                        $rName = checkName($_POST["vorname"]);
+                        $rMail = checkMail($_POST["email"]);
+                        $sprache = $_POST["newsletterSprache"];
                     }
-                    echo $anmeldungCounnter;
-                    $anmeldungCounnter = 0;
+                    ?>
+                </p>
+                <?php
+
+                $exist = false;
+                $userdata  = $rName.';'.$rMail.';'.$sprache."\n";
+                $filecheck = fopen("Benutzerdaten.txt", 'r');
+                while(!feof($filecheck))
+                {
+                    if($userdata == fgets($filecheck)) {
+                        $exist = true;
+                        echo "Wurde schon gespeichert!";
+                        break;
+                    }
+                }
+                fclose($filecheck);
+                ?>
+                <p class = "succ">
+                    <?php
+                    if(!$exist)
+                    {
+                        $file = fopen('Benutzerdaten.txt','a');
+
+                        if(isset($rName, $rMail,$sprache) && $userdata != ";;"."\n")
+                        {
+                            fwrite($file,$rName.';'.$rMail.';'.$sprache."\n");
+                            echo "Anmeldung erfolgreich!";
+                        }
+                        fclose($file);
+                    }
+                    ?>
+                </p>
+                <td><?php echo anmHoch();
                     ?></td>
                 <td> Anmeldungen</td>
                 <td> 9 </td>
@@ -272,20 +307,7 @@ include("Newsletteranmeldung.php");
         </table>
         <br><br>
         <h2 id="kontakt">Interesse geweckt? Wir informieren Sie!</h2>
-        <p class = "vibeCheck">
-            <?php
-            $rName = "";
-            $rMail = "";
-            $sprache = "";
 
-            if(isset($_POST["vorname"], $_POST["email"],$_POST["newsletterSprache"]))
-            {
-                $rName = checkName($_POST["vorname"]);
-                $rMail = checkMail($_POST["email"]);
-                $sprache = $_POST["newsletterSprache"];
-            }
-            ?>
-        </p>
         <form method="post" action="">
             <fieldset>
                 <p>
@@ -297,7 +319,7 @@ include("Newsletteranmeldung.php");
                     <label for="email">Ihre E-mail:</label>
                     <input name = "email" type="email" size="10" id="email" required>
                 </p>
-                
+
                 <label for="newsletterLang">Newsletter bitte in:</label>
                 <select name="newsletterSprache" id="newsletterLang">
                     <option value="de">Deutsch</option>
@@ -312,36 +334,7 @@ include("Newsletteranmeldung.php");
                 </div>
             </fieldset>
         </form>
-        <?php
 
-        $exist = false;
-        $userdata  = $rName.';'.$rMail.';'.$sprache."\n";
-        $filecheck = fopen("Benutzerdaten.txt", 'r');
-        while(!feof($filecheck))
-        {
-            if($userdata == fgets($filecheck)) {
-                $exist = true;
-                echo "Wurde schon gespeichert!";
-                break;
-            }
-        }
-        fclose($filecheck);
-        ?>
-        <p class = "succ">
-            <?php
-            if(!$exist)
-            {
-                $file = fopen('Benutzerdaten.txt','a');
-
-                if(isset($rName, $rMail,$sprache) && $userdata != ";;"."\n")
-                {
-                    fwrite($file,$rName.';'.$rMail.';'.$sprache."\n");
-                    echo "Anmeldung erfolgreich!";
-                }
-                fclose($file);
-            }
-            ?>
-        </p>
         <h2 id="wichtiges">Das ist uns wichtig...</h2>
         <ul id="endList">
             <li>Beste frische saisonale Zutaten</li>
@@ -359,6 +352,18 @@ include("Newsletteranmeldung.php");
         </footer>
     </div>
     <div class="Empty1"></div>
+    <?php
+    function anmHoch() : int
+    {
+        $anmeldungCounnter = -1;
+        $data = file_get_contents('Benutzerdaten.txt');
+        foreach (preg_split("/((\r?\n)|(\r\n?))/", $data) as $ignored){
+            $anmeldungCounnter++;
+        }
+        return $anmeldungCounnter;
+        //$anmeldungCounnter = 0;
+    }
+    ?>
 </div>
 </body>
 </html>
