@@ -235,7 +235,6 @@ include("Newsletteranmeldung.php");
             }
         echo "</ul>";
         ?>
-
         <h2 id="zahlen">E-Mensa in Zahlen</h2>
         <table class="TheNumbersMasonWhatDoTheyMean">
             <tr>
@@ -246,7 +245,56 @@ include("Newsletteranmeldung.php");
                     echo $anzahl['besuche'];
                     ?>
                 </th> <th> Besuche</th>
-                <th><?php echo $anzahl['newsletteranmeldung']; ?></th> <th> Anmeldungen</th>
+                <p class = "vibeCheck">
+                    <?php
+                    $rName = "";
+                    $rMail = "";
+                    $sprache = "";
+
+                    if(isset($_POST["vorname"], $_POST["email"],$_POST["newsletterSprache"]))
+                    {
+                        $rName = checkName($_POST["vorname"]);
+                        $rMail = checkMail($_POST["email"]);
+                        $sprache = $_POST["newsletterSprache"];
+                    }
+                    ?>
+                </p>
+                <?php
+
+                $exist = false;
+                $userdata  = $rName.';'.$rMail.';'.$sprache."\n";
+                $filecheck = fopen("Benutzerdaten.txt", 'r');
+                while(!feof($filecheck))
+                {
+                    if($userdata == fgets($filecheck)) {
+                        $exist = true;
+                        echo "Wurde schon gespeichert!";
+                        break;
+                    }
+                }
+                fclose($filecheck);
+                ?>
+                <p class = "succ">
+                    <?php
+                    if(!$exist)
+                    {
+                        $file = fopen('Benutzerdaten.txt','a');
+
+                        if(isset($rName, $rMail,$sprache) && $userdata != ";;"."\n")
+                        {
+                            fwrite($file,$rName.';'.$rMail.';'.$sprache."\n");
+                            echo "Anmeldung erfolgreich!";
+                        }
+                        fclose($file);
+                    }
+                    ?>
+                </p>
+                <th><?php $anmeldungCounnter = -1;
+                    $data = file_get_contents('Benutzerdaten.txt');
+                    foreach (preg_split("/((\r?\n)|(\r\n?))/", $data) as $ignored){
+                        $anmeldungCounnter++;
+                    }
+                    echo $anmeldungCounnter; ?></th> <th> Anmeldungen</th>
                 <th><?php
                     $sql_abfrage_4 = "SELECT COUNT(name) as total FROM gericht";
                     $collect_anzahl_g = mysqli_query($database_connect,$sql_abfrage_4);
@@ -258,20 +306,7 @@ include("Newsletteranmeldung.php");
         </table>
         <br><br>
         <h2 id="kontakt">Interesse geweckt? Wir informieren Sie!</h2>
-        <p class = "vibeCheck">
-            <?php
-            $rName = "";
-            $rMail = "";
-            $sprache = "";
 
-            if(isset($_POST["vorname"], $_POST["email"],$_POST["newsletterSprache"]))
-            {
-                $rName = checkName($_POST["vorname"]);
-                $rMail = checkMail($_POST["email"]);
-                $sprache = $_POST["newsletterSprache"];
-            }
-            ?>
-        </p>
         <form method="post" action="">
             <fieldset>
                 <p>
@@ -298,38 +333,6 @@ include("Newsletteranmeldung.php");
                 </div>
             </fieldset>
         </form>
-        <?php
-
-        $exist = false;
-        $userdata  = $rName.';'.$rMail.';'.$sprache."\n";
-        $filecheck = fopen("Benutzerdaten.txt", 'r');
-        while(!feof($filecheck))
-        {
-            if($userdata == fgets($filecheck)) {
-                $exist = true;
-                echo "Wurde schon gespeichert!";
-                break;
-            }
-        }
-        fclose($filecheck);
-        ?>
-        <p class = "succ">
-            <?php
-            if(!$exist)
-            {
-                $file = fopen('Benutzerdaten.txt','a');
-
-                if(isset($rName, $rMail,$sprache) && $userdata != ";;"."\n")
-                {
-                    fwrite($file,$rName.';'.$rMail.';'.$sprache."\n");
-                    echo "Anmeldung erfolgreich!";
-                    $sql_update_newsletter = "UPDATE zahlen SET newsletteranmeldung = newsletteranmeldung + 1";
-                    mysqli_query($database_connect, $sql_update_newsletter);
-                }
-                fclose($file);
-            }
-            ?>
-        </p>
         <h2 id="wichtiges">Das ist uns wichtig...</h2>
         <ul id="endList">
             <li>Beste frische saisonale Zutaten</li>
