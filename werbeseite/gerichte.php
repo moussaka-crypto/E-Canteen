@@ -11,5 +11,3 @@ $gerichte = [
     2 => ['Nasi Lemak','4.50','9.20','nasi_lemak.jpg'],
     3 => ['Moussaka','4.50','9.20','moussaka.jpg']
 ];
-
-sort($gerichte);
