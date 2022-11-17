@@ -233,7 +233,7 @@ include("Newsletteranmeldung.php");
         <h2 id="zahlen">E-Mensa in Zahlen</h2>
         <table class="TheNumbersMasonWhatDoTheyMean">
             <tr>
-                <td><?php
+                <th><?php
                     if(!file_exists("besuche.txt"))
                     {
                         echo "1";
@@ -243,14 +243,15 @@ include("Newsletteranmeldung.php");
                     else{
                         $visitfile = fopen('besuche.txt', 'r');
                         $visits = fgets($visitfile,1024);
-                        echo $visits;
                         fclose($visitfile);
 
                         $visits++; // wird nur bei Neuladen inkrementiert werden
                         $visitfile = fopen('besuche.txt','w');
                         fwrite($visitfile,$visits);
+                        echo $visits;
                     }
                     fclose($visitfile);
+
                     ?>
                 </th> <th> Besuche</th>
                 <p class = "vibeCheck">
@@ -268,7 +269,6 @@ include("Newsletteranmeldung.php");
                     ?>
                 </p>
                 <?php
-
                 $exist = false;
                 $userdata  = $rName.';'.$rMail.';'.$sprache."\n";
                 $filecheck = fopen("Benutzerdaten.txt", 'r');
@@ -303,7 +303,7 @@ include("Newsletteranmeldung.php");
                         $anmeldungCounnter++;
                     }
                     echo $anmeldungCounnter; ?></th> <th> Anmeldungen</th>
-                <th><?php
+                <p><?php
                     $sql_abfrage_4 = "SELECT COUNT(name) as total FROM gericht";
                     $collect_anzahl_g = mysqli_query($database_connect,$sql_abfrage_4);
                     $anzahl_gericht = mysqli_fetch_assoc($collect_anzahl_g);
@@ -340,11 +340,8 @@ include("Newsletteranmeldung.php");
                     }
                     ?>
                 </p>
-                <td><?php echo anmHoch();
-                    ?></td>
-                <td> Anmeldungen</td>
-                <td> 9 </td>
-                <td> Speisen</td>
+                <th> 9 </th>
+                <th> Speisen</th>
             </tr>
         </table>
         <br><br>
@@ -393,18 +390,6 @@ include("Newsletteranmeldung.php");
         </footer>
     </div>
     <div class="Empty1"></div>
-    <?php
-    function anmHoch() : int
-    {
-        $anmeldungCounnter = -1;
-        $data = file_get_contents('Benutzerdaten.txt');
-        foreach (preg_split("/((\r?\n)|(\r\n?))/", $data) as $ignored){
-            $anmeldungCounnter++;
-        }
-        return $anmeldungCounnter;
-        //$anmeldungCounnter = 0;
-    }
-    ?>
 </div>
 </body>
 </html>
