@@ -6,7 +6,7 @@
  */
 $database_connect = mysqli_connect("localhost", // Host der Datenbank
     "root",                 // Benutzername zur Anmeldung
-    "dbwt",    // Passwort
+    "root",    // Passwort
     "emensawerbeseite",     // Auswahl der Datenbanken (bzw. des Schemas)
     3306 // optional port der Datenbank
 );
@@ -18,8 +18,6 @@ if (!$database_connect) {
 
 $sql_update_besuch = "UPDATE zahlen SET besuche = besuche + 1";
 mysqli_query($database_connect,$sql_update_besuch);
-
-
 
 $sql_abfrage_0 = "SELECT id,name,preis_intern,preis_extern FROM gericht g ORDER BY RAND() LIMIT 5";
 $gericht_details = mysqli_query($database_connect, $sql_abfrage_0);
