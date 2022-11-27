@@ -5,16 +5,16 @@
  * Muhammad Zulfahmi, bin Zaid, 3520750
  */
 
-function checkName($vorname)
+function checkName($vorname): ?string
 {
     if(ctype_space($vorname) || !ctype_alpha($vorname))
     {
         echo "Ihr Name entspricht nicht den Vorgaben!\n";
     }
-    else return trim($vorname);
+    else return htmlspecialchars($vorname);
     return null;
 }
-function checkMail($mail)
+function checkMail($mail): ?string
 {
     if(isset($_POST["email"])&& !filter_var($mail,FILTER_VALIDATE_EMAIL))
         echo "Ihre E-Mail entspricht nicht den Vorgaben!\n";
@@ -25,6 +25,6 @@ function checkMail($mail)
         stripos($mail,'trashmail'))
         echo "Trash mail!\n";
 
-    else return $mail;
+    else return htmlspecialchars($mail);
     return null;
 }

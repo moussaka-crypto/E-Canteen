@@ -245,15 +245,18 @@ include("Newsletteranmeldung.php");
                 </th> <th> Besuche</th>
                 <p class = "vibeCheck">
                     <?php
-                    $rName = "";
-                    $rMail = "";
-                    $sprache = "";
+                    $rName = ""; $rMail = ""; $sprache = "";
+                    const DEFAULT_LANGUAGE = 'de';
+                    const ALLOWED_LANGUAGES = ['de','en'];
 
                     if(isset($_POST["vorname"], $_POST["email"],$_POST["newsletterSprache"]))
                     {
                         $rName = checkName($_POST["vorname"]);
                         $rMail = checkMail($_POST["email"]);
-                        $sprache = $_POST["newsletterSprache"];
+                        $sprache = $_POST['newsletterSprache'] ?? null;
+                        if(!in_array($sprache,ALLOWED_LANGUAGES)){
+                            $sprache = DEFAULT_LANGUAGE;
+                        }
                     }
                     ?>
                 </p>
@@ -305,7 +308,7 @@ include("Newsletteranmeldung.php");
         <br><br>
         <h2 id="kontakt">Interesse geweckt? Wir informieren Sie!</h2>
 
-        <form method="post" action="">
+        <form action="" method="post">
             <fieldset>
                 <p>
                     <label for="vorname">Ihr Name:</label>

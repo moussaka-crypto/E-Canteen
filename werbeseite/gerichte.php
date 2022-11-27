@@ -11,3 +11,6 @@ $gerichte = [
     2 => ['Nasi Lemak','4.50','9.20','nasi_lemak.jpg'],
     3 => ['Moussaka','4.50','9.20','moussaka.jpg']
 ];
+
+//https://stackoverflow.com/questions/2002710/php-how-to-perform-htmlspecialchar-on-an-array-of-arrays
+array_walk_recursive($gerichte, "htmlspecialchars");

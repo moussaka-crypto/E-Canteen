@@ -28,6 +28,11 @@ if(isset($_POST["gericht"])&&
     $email = '\''.$_POST["email"].'\'';
     $ersteller = '\''.$_POST["ersteller"].'\'';
 
+    $gerichtName = htmlspecialchars($gerichtName);
+    $beschreibung = htmlspecialchars($beschreibung);
+    $email = htmlspecialchars($email);
+    $ersteller = htmlspecialchars($ersteller);
+
     // SQL-Injection my ass
     $gerichtName = mysqli_real_escape_string($database_connect, $gerichtName);
     $beschreibung = mysqli_real_escape_string($database_connect, $beschreibung);
@@ -45,6 +50,10 @@ else if(isset($_POST["gericht"])&&
     $gerichtName = '\''.$_POST["gericht"].'\'';
     $beschreibung = '\''.$_POST["beschreibung"].'\'';
     $email = '\''.$_POST["email"].'\'';
+
+    $gerichtName = htmlspecialchars($gerichtName);
+    $beschreibung = htmlspecialchars($beschreibung);
+    $email = htmlspecialchars($email);
 
     // SQL-Injection my ass
     $gerichtName = mysqli_real_escape_string($database_connect, $gerichtName);
@@ -80,7 +89,7 @@ if(isset($db_gerichtDaten) && isset($db_ersteller))
 </head>
 <style>
     fieldset{
-        width: 350px;
+        width: 300px;
     }
     input{
         margin-bottom: 7px;
