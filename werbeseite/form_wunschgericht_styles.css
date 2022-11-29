@@ -1,0 +1,23 @@
+*{
+box-sizing: border-box;
+}
+fieldset{
+   width:30%;
+   height: 390px;
+   margin: 10% auto 0 auto;
+}
+legend{
+   text-align: center;
+   font-weight: bold;
+   font-size: 1.5rem;
+}
+form div label input,textarea{
+   width: 100%;
+   height: auto;
+}
+div{
+   padding-bottom: 10px;
+}
+input[type="submit"]{
+   margin-top: 10px;
+}
