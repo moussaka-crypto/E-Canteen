@@ -98,5 +98,6 @@ VALUES ('$gerichtName', '$beschreibung','$same_id', $datum);";
         <br>
     </fieldset>
 </form>
+<button><a href="werbeseite.php">Zurück</a></button>
 </body>
 </html>

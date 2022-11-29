@@ -306,7 +306,7 @@ include("Newsletteranmeldung.php");
                 </th> <th> Speisen</th>
             </tr>
         </table>
-        <br><br>
+        <p>Haben Sie <a href="wunschgericht.php">Wunschgerichte?</a></p>
         <h2 id="kontakt">Interesse geweckt? Wir informieren Sie!</h2>
 
         <form action="" method="post">

@@ -11,6 +11,9 @@ legend{
    font-weight: bold;
    font-size: 1.5rem;
 }
+input{
+   width: 100%;
+}
 form div label input,textarea{
    width: 100%;
    height: auto;
@@ -26,4 +29,11 @@ fieldset{
 }
 input{
    margin-bottom: 7px;
+}
+button{
+   margin: 50px 50% 0 48%;
+}
+a{
+   text-decoration: none;
+   color: black;
 }
