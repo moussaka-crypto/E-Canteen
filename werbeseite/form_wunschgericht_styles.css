@@ -21,3 +21,9 @@ div{
 input[type="submit"]{
    margin-top: 10px;
 }
+fieldset{
+   width: 300px;
+}
+input{
+   margin-bottom: 7px;
+}

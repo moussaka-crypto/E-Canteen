@@ -38,12 +38,11 @@ if(isset($_POST["gericht"])&&
     $email = mysqli_real_escape_string($database_connect, $email);
     $ersteller = mysqli_real_escape_string($database_connect, $ersteller);
 
-    $exist = false;
     $check_email = "SELECT id FROM ersteller WHERE email = "."'".$email."'".";";
     $ask_email = mysqli_query($database_connect,$check_email);
     $collected_data = mysqli_fetch_assoc($ask_email);
 
-    if(is_null($collected_data['id'])) {
+    if (is_null($collected_data['id'])) {
         $db_new_ersteller = "INSERT INTO emensawerbeseite.ersteller (Name, EMail) VALUES ('$ersteller', '$email');";
         $db_gerichtDaten = "INSERT INTO emensawerbeseite.wunschgericht (Name, Beschreibung, ersteller_id, Erstellungsdatum)
     VALUES ('$gerichtName', '$beschreibung', (SELECT MAX(ID) FROM emensawerbeseite.ersteller), $datum);";
@@ -53,24 +52,19 @@ if(isset($_POST["gericht"])&&
             echo "Error during Query: ", mysqli_error($database_connect);
             exit();
         }
-        $gerichtDatenQueryResult = mysqli_query($database_connect, $db_gerichtDaten);
-        if (!$gerichtDatenQueryResult) {
-            echo "Error during Query: ", mysqli_error($database_connect);
-            exit();
-        }
     }else {
         $same_id = $collected_data['id'];
         $db_gerichtDaten = "INSERT INTO emensawerbeseite.wunschgericht (Name, Beschreibung, ersteller_id, Erstellungsdatum)
 VALUES ('$gerichtName', '$beschreibung','$same_id', $datum);";
 
-        $gerichtDatenQueryResult = mysqli_query($database_connect, $db_gerichtDaten);
-        if (!$gerichtDatenQueryResult) {
-            echo "Error during Query: ", mysqli_error($database_connect);
-            exit();
-        }
     }
+    $gerichtDatenQueryResult = mysqli_query($database_connect, $db_gerichtDaten);
+    if (!$gerichtDatenQueryResult) {
+        echo "Error during Query: ", mysqli_error($database_connect);
+        exit();
+    }
+    header('location:wunschgericht.php');
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -80,16 +74,8 @@ VALUES ('$gerichtName', '$beschreibung','$same_id', $datum);";
     <title>Eingabeformular</title>
     <link rel="stylesheet" href="form_wunschgericht_styles.css">
 </head>
-<style>
-    fieldset{
-        width: 300px;
-    }
-    input{
-        margin-bottom: 7px;
-    }
-</style>
 <body>
-<form action="<?php echo $_SERVER["PHP_SELF"]; // A1 4)?>" method = "post">
+<form method = "post">
     <fieldset>
         <legend><em>Eingabeformular für Ihr Wunschgericht</em></legend>
         <label for="gericht">Name*</label>

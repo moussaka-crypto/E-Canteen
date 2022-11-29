@@ -6,7 +6,7 @@
  */
 $database_connect = mysqli_connect("localhost", // Host der Datenbank
     "root",                 // Benutzername zur Anmeldung
-    "root",    // Passwort
+    "dbwt",    // Passwort
     "emensawerbeseite",     // Auswahl der Datenbanken (bzw. des Schemas)
     3306 // optional port der Datenbank
 );
@@ -30,6 +30,7 @@ $sql_abfrage_2 = "SELECT code, name FROM allergen";
 $allergen_details = mysqli_query($database_connect,$sql_abfrage_2);
 
 include("Newsletteranmeldung.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
