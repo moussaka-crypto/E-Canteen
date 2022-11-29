@@ -19,8 +19,6 @@ if (!$database_connect) {
 $sql_update_besuch = "UPDATE zahlen SET besuche = besuche + 1";
 mysqli_query($database_connect,$sql_update_besuch);
 
-
-
 $sql_abfrage_0 = "SELECT id,name,preis_intern,preis_extern FROM gericht g ORDER BY RAND() LIMIT 5";
 $gericht_details = mysqli_query($database_connect, $sql_abfrage_0);
 
@@ -289,9 +287,9 @@ include("Newsletteranmeldung.php");
                     }
                     ?>
                 </p>
-                <th><?php $anmeldungCounnter = -1;
+                <th><?php $anmeldungCounnter = 0;
                     $data = file_get_contents('Benutzerdaten.txt');
-                    foreach (preg_split("/((\r?\n)|(\r\n?))/", $data) as $ignored){
+                    foreach (preg_split("/((\r?\n)|(\r\n?))/", $data, PHP_INT_MAX ,PREG_SPLIT_NO_EMPTY) as $ignored){
                         $anmeldungCounnter++;
                     }
                     echo $anmeldungCounnter; ?></th> <th> Anmeldungen</th>

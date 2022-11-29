@@ -1,0 +1,107 @@
+* {
+    font-family: "Baskerville  Face", serif;
+    font-size: 18px;
+}
+td{
+    padding-bottom: 10px;
+}
+.webseite{
+    width: 69vw;
+    background-color: lavender;
+
+    border-style: solid;
+    border-color: indigo;
+    border-spacing: 5px;
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+    margin-left: 15%;
+}
+.Header1{
+    border: 1px solid indigo;
+    margin-right: 2px;
+    margin-left: 3px;
+    text-align: center;
+    font-size: 20px;
+}
+.Header2 > a{
+    margin-right: 30px;
+    font-size: 22px;
+    text-decoration: none;
+}
+.Header2{
+    border: 1px solid indigo;
+    margin-left: 3px;
+    margin-right: 3px;
+    padding-bottom: 2px;
+    text-align: center;
+}
+.Empty{
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+}
+.PageSetup{
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+.Empty1{
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+.Food, .TheNumbersMasonWhatDoTheyMean{
+    width: 90%;
+    margin: auto;
+}
+.end{
+    text-align: center;
+    font-size: 30px;
+    font-style: italic;
+}
+footer {
+    border-top: 3px solid indigo;
+    text-align: center;
+    padding-top: 5px;
+}
+#speisen
+{
+    display: table;
+    margin-top: 8px;
+    text-align: left;
+}
+#speisen,#zahlen,#kontakt,#wichtiges{
+    font-size: 30px;
+    font-style: italic;
+}
+footer > ul {
+    list-style: none;
+    text-align: center;
+}
+footer ul li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+    border-left: 1px solid indianred;
+}
+ul li:first-child {
+    border-left: none;
+}
+.pic{
+    width: 100%;
+    padding-top: 20px;
+}
+.succ{
+    font-family: "Baskerville  Face", serif;
+    font-size: 22px;
+    color: green;
+}
+.vibeCheck{
+    font-family: "Baskerville  Face", serif;
+    font-size: 22px;
+    color:darkred;
+}
+td {
+    border: 1px solid black;
+}
+th{
+    border: 1px solid black;
+}

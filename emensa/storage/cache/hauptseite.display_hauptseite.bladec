@@ -1,0 +1,85 @@
+<?php $_shouldextend[1]=1; ?>
+
+<?php $this->startSection('Kopfbereich & Navigation'); ?>
+ <div class="Header1">
+ E-Mensa Logo
+ </div>
+
+ <div class="Header2">
+ <a href="#ank">Ank&uuml;ndigung</a>
+ <a href="#speisen">Speisen</a>
+ <a href="#zahlen">Zahlen</a>
+ <a href="#kontakt">Kontakt</a>
+ <a href="#wichtiges">Wichtig f&uuml;r uns</a>
+ </div>
+<?php $this->stopSection(); ?>
+
+<?php $this->startSection('Begrüßungstext'); ?>
+ <img src="/img/Spinat_Risotto.jpg" alt="Spinatrisotto" class="pic">
+
+ <h2 id="ank">
+ <i>Bald gibt's Essen auch online ;)</i>
+ </h2>
+ <fieldset>
+ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+ <br><br>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+ </fieldset>
+<?php $this->stopSection(); ?>
+
+<?php $this->startSection('Gerichte Uebersicht'); ?>
+<table class="Food">
+ <tr>
+ <th>Gericht</th>
+ <th>Preis intern</th>
+ <th>Preis extern</th>
+ <th>Bild</th>
+ </tr>
+ <?php $__currentLoopData = $erste_5; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $value): $loop = $this->incrementLoopIndices();  ?>
+ <tr>
+ <?php $__currentLoopData = $value; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $element): $loop = $this->incrementLoopIndices();  ?>
+ <?php if($loop->last): ?>
+ <td><img src="<?php echo \htmlentities($element??'', ENT_QUOTES, 'UTF-8', false); ?>" width=260px height=160px alt=gerichte></td>
+ <?php else: ?>
+ <td><?php echo \htmlentities($element??'', ENT_QUOTES, 'UTF-8', false); ?></td>
+ <?php endif; ?>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </tr>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+
+ <?php $__currentLoopData = $gericht_details; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $value): $loop = $this->incrementLoopIndices();  ?>
+ <tr>
+ <td>
+ <?php echo \htmlentities($value['name']??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ <?php $__currentLoopData = $ga_details; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $allergens_list): $loop = $this->incrementLoopIndices();  ?>
+ <?php if($allergens_list['gericht_id'] == $value['id']): ?>
+ <p>Allergene: <?php echo \htmlentities($allergens_list['allergens']??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ <?php endif; ?>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </td>
+ <td><?php echo \htmlentities($value['preis_intern']??'', ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($value['preis_extern']??'', ENT_QUOTES, 'UTF-8', false); ?></td>
+ </tr>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+</table>
+<ul>
+ <?php $__currentLoopData = $allergen_details; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $value): $loop = $this->incrementLoopIndices();  ?>
+ <li><?php echo \htmlentities($value['code']??'', ENT_QUOTES, 'UTF-8', false); ?> -- <?php echo \htmlentities($value['name']??'', ENT_QUOTES, 'UTF-8', false); ?></li>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+</ul>
+<?php $this->stopSection(); ?>
+
+<?php $this->startSection('Fußbereich & Copyright'); ?>
+ <ul>
+ <li>&copy; E-Mensa GmbH</li>
+ <li>Hris, Vammy</li>
+ <li><a href="javascript:" id="Impressum">Impressum</a><li>
+ </ul>
+<?php $this->stopSection(); ?>
+
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('hauptseite.hauptseite_layout'); } ?>

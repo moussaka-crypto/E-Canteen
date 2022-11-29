@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>E-Mensa Eupenerstraße</title>
+ <link rel="stylesheet" href="/css/hauptseite_styles.css">
+</head>
+<body>
+
+<div class="webseite">
+
+ <?php echo $this->yieldContent('Kopfbereich & Navigation'); ?>
+ <div class="Empty">
+ </div>
+
+ <div class="PageSetup">
+ <?php echo $this->yieldContent('Begrüßungstext'); ?>
+ <h2 id="speisen">K&ouml;stlichkeiten, die Sie erwarten</h2>
+ <?php echo $this->yieldContent('Gerichte Uebersicht'); ?>
+
+ <footer>
+ <?php echo $this->yieldContent('Fußbereich & Copyright'); ?>
+ </footer>
+ </div>
+ <div class="Empty1"></div>
+</div>
+</body>
+</html>
+
