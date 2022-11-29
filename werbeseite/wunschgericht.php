@@ -6,7 +6,7 @@
  */
 $database_connect = mysqli_connect("localhost", // Host der Datenbank
     "root",                 // Benutzername zur Anmeldung
-    "root",    // Passwort
+    "dbwt",    // Passwort
     "emensawerbeseite",     // Auswahl der Datenbanken (bzw. des Schemas)
     3306 // optional port der Datenbank
 );
@@ -20,13 +20,12 @@ if (!$database_connect) {
 
 if(isset($_POST["gericht"])&&
     isset($_POST["beschreibung"])&&
-    isset($_POST["email"])&&
-    isset($_POST["ersteller"]))
+    isset($_POST["email"]))
 {
     $gerichtName = '\''.$_POST["gericht"].'\'';
     $beschreibung = '\''.$_POST["beschreibung"].'\'';
     $email = '\''.$_POST["email"].'\'';
-    $ersteller = '\''.$_POST["ersteller"].'\'';
+    $ersteller = (!empty($_POST["ersteller"])) ? '\''.$_POST["ersteller"].'\'': 'anonym';
 
     $gerichtName = htmlspecialchars($gerichtName);
     $beschreibung = htmlspecialchars($beschreibung);
@@ -39,46 +38,39 @@ if(isset($_POST["gericht"])&&
     $email = mysqli_real_escape_string($database_connect, $email);
     $ersteller = mysqli_real_escape_string($database_connect, $ersteller);
 
-    $db_ersteller = "INSERT INTO emensawerbeseite.ersteller (Name, EMail) VALUES ('$ersteller', '$email');";
-    $db_gerichtDaten = "INSERT INTO emensawerbeseite.wunschgericht (Name, Beschreibung, ID_Ersteller, Erstellungsdatum)
+    $exist = false;
+    $check_email = "SELECT id FROM ersteller WHERE email = "."'".$email."'".";";
+    $ask_email = mysqli_query($database_connect,$check_email);
+    $collected_data = mysqli_fetch_assoc($ask_email);
+
+    if(is_null($collected_data['id'])) {
+        $db_new_ersteller = "INSERT INTO emensawerbeseite.ersteller (Name, EMail) VALUES ('$ersteller', '$email');";
+        $db_gerichtDaten = "INSERT INTO emensawerbeseite.wunschgericht (Name, Beschreibung, ersteller_id, Erstellungsdatum)
     VALUES ('$gerichtName', '$beschreibung', (SELECT MAX(ID) FROM emensawerbeseite.ersteller), $datum);";
-}
-else if(isset($_POST["gericht"])&&
-    isset($_POST["beschreibung"])&&
-    isset($_POST["email"]))
-{
-    $gerichtName = '\''.$_POST["gericht"].'\'';
-    $beschreibung = '\''.$_POST["beschreibung"].'\'';
-    $email = '\''.$_POST["email"].'\'';
 
-    $gerichtName = htmlspecialchars($gerichtName);
-    $beschreibung = htmlspecialchars($beschreibung);
-    $email = htmlspecialchars($email);
+        $erstellerQueryResult = mysqli_query($database_connect, $db_new_ersteller);
+        if (!$erstellerQueryResult) {
+            echo "Error during Query: ", mysqli_error($database_connect);
+            exit();
+        }
+        $gerichtDatenQueryResult = mysqli_query($database_connect, $db_gerichtDaten);
+        if (!$gerichtDatenQueryResult) {
+            echo "Error during Query: ", mysqli_error($database_connect);
+            exit();
+        }
+    }else {
+        $same_id = $collected_data['id'];
+        $db_gerichtDaten = "INSERT INTO emensawerbeseite.wunschgericht (Name, Beschreibung, ersteller_id, Erstellungsdatum)
+VALUES ('$gerichtName', '$beschreibung','$same_id', $datum);";
 
-    // SQL-Injection my ass
-    $gerichtName = mysqli_real_escape_string($database_connect, $gerichtName);
-    $beschreibung = mysqli_real_escape_string($database_connect, $beschreibung);
-    $email = mysqli_real_escape_string($database_connect, $email);
-
-    $db_ersteller = "INSERT INTO emensawerbeseite.ersteller (Name, EMail) VALUES ('$email');";
-    $db_gerichtDaten = "INSERT INTO emensawerbeseite.wunschgericht (Name, Beschreibung, ID_Ersteller, Erstellungsdatum)
-    VALUES ('$gerichtName', '$beschreibung', (SELECT MAX(ID) FROM emensawerbeseite.ersteller), $datum);";
-}
-
-if(isset($db_gerichtDaten) && isset($db_ersteller))
-{
-    $erstellerQueryResult = mysqli_query($database_connect,$db_ersteller);
-    if(!$erstellerQueryResult) {
-        echo "Error during Query: ", mysqli_error($database_connect);
-        exit();
-    }
-
-    $gerichtDatenQueryResult = mysqli_query($database_connect, $db_gerichtDaten);
-    if(!$gerichtDatenQueryResult){
-        echo "Error during Query: ", mysqli_error($database_connect);
-        exit();
+        $gerichtDatenQueryResult = mysqli_query($database_connect, $db_gerichtDaten);
+        if (!$gerichtDatenQueryResult) {
+            echo "Error during Query: ", mysqli_error($database_connect);
+            exit();
+        }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -86,6 +78,7 @@ if(isset($db_gerichtDaten) && isset($db_ersteller))
 <head>
     <meta charset="UTF-8">
     <title>Eingabeformular</title>
+    <link rel="stylesheet" href="form_wunschgericht_styles.css">
 </head>
 <style>
     fieldset{
@@ -105,7 +98,7 @@ if(isset($db_gerichtDaten) && isset($db_ersteller))
         <br>
         <label for="beschreibung">Beschreibung*</label>
         <br>
-        <input type = "text" size="33" placeholder="Beschreibung des Gerichts eingeben" id="beschreibung" name="beschreibung" required>
+        <textarea id="beschreibung" name="beschreibung" rows="5" cols="300">"Beschreibung des Gerichts eingeben"</textarea>
         <br>
         <label for="email">E-Mail*</label>
         <br>
@@ -113,7 +106,7 @@ if(isset($db_gerichtDaten) && isset($db_ersteller))
         <br>
         <label for="ersteller">Ihr Name*</label>
         <br>
-        <input type="text" size="33" placeholder="Ihren Namen eingeben" id="ersteller" name="ersteller" required>
+        <input type="text" size="33" placeholder="Ihren Namen eingeben" id="ersteller" name="ersteller">
         <br><br>
         <input type="submit" value="Wunsch abschicken">
         <br>
