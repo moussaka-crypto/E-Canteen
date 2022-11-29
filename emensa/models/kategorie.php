@@ -12,8 +12,6 @@ function db_kategorie_select_all() {
 
     mysqli_close($link);
     return $data;
-<<<<<<< HEAD
-=======
 }
 
 function db_kategorie_select_all_name(){
@@ -26,5 +24,4 @@ function db_kategorie_select_all_name(){
 
     mysqli_close($link);
     return $data;
->>>>>>> Zulfahmi
 }

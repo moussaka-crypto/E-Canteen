@@ -23,9 +23,6 @@ function db_gericht_select_all() {
     finally {
         return $data;
     }
-<<<<<<< HEAD
-}
-=======
 }
 
 function db_gericht_name_intern_preis(){
@@ -117,5 +114,3 @@ function db_code_allergen(){
         return $data;
     }
 }
-
->>>>>>> Zulfahmi

@@ -1,9 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/kategorie.php');
-<<<<<<< HEAD
-=======
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/gericht.php');
->>>>>>> Zulfahmi
 
 class ExampleController
 {
@@ -11,7 +8,7 @@ class ExampleController
         /*
            Wenn Sie hier landen:
            bearbeiten Sie diese Action,
-           so dass Sie die Aufgabe löst
+           sodass Sie die Aufgabe löst
         */
 
         return view('notimplemented', [
@@ -19,8 +16,7 @@ class ExampleController
             'url' => 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}"
         ]);
     }
-<<<<<<< HEAD
-=======
+
     public function m4_7a_queryparameter(RequestData $rd) {
         return view('examples.m4_7a_queryparameter', [
             'request'=> $rd,
@@ -62,5 +58,4 @@ class ExampleController
             ]);
         }
     }
->>>>>>> Zulfahmi
 }
