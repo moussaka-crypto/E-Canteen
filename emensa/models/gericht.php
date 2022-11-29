@@ -23,5 +23,4 @@ function db_gericht_select_all() {
     finally {
         return $data;
     }
-
 }

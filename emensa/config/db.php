@@ -4,6 +4,5 @@ return [
     'user' => 'root',       // '<yourusername>'
     'password' => 'abc123', // '<yourpassword>'
     'database' => 'emensawerbeseite',
-    // optionally: set port below if it differs from the default 3306
-    // 'port' => 13306
+    'port' => 3306,
 ];
