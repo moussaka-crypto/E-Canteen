@@ -47,13 +47,13 @@ class ExampleController
         if ($rd->getGetData()['no'] == 2) {
             return view('examples.m4_7d_page_2', [
                 'request' => $rd,
-                'data' => $data2,
+                'data' => $data1,
                 'url' => 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}"
             ]);
         } else {
             return view('examples.m4_7d_page_1', [
                 'request' => $rd,
-                'data' => $data1,
+                'data' => $data2,
                 'url' => 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}"
             ]);
         }
