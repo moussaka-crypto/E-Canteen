@@ -1,13 +1,13 @@
 @extends('layout')
 
 @section("content")
-    <ul>
+    <ol>
         @if(!empty($data))
         @foreach($data as $value)
-                <li>NAME: {{$value['name']}}, PREIS: {{$value['preis_intern']}}</li>
+                <li><i>{{$value['name']}}</i> | <b>{{$value['preis_intern']}}&euro;</b></li>
         @endforeach
         @else
-            <li>Kein Gericht Vorhanden</li>
+            <li>Keine Gerichte vorhanden.</li>
         @endif
-    </ul>
+    </ol>
 @endsection

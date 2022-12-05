@@ -119,7 +119,6 @@ include("Newsletteranmeldung.php");
         }
         footer ul li {
             display: inline-block;
-            padding-right: 5px;
             padding-left: 5px;
             border-left: 1px solid indianred;
         }
@@ -144,7 +143,7 @@ include("Newsletteranmeldung.php");
             border: 1px solid black;
         }
         th{
-            border: 1px solid black;
+            font-size: 27px;
         }
     </style>
 </head>
@@ -173,10 +172,10 @@ include("Newsletteranmeldung.php");
         <h2 id="ank">
             <i>Bald gibt's Essen auch online ;)</i>
         </h2>
-        <fieldset>
+        <div>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
             <br><br>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-        </fieldset>
+        </div>
 
         <h2 id="speisen">K&ouml;stlichkeiten, die Sie erwarten</h2>
 
@@ -243,7 +242,7 @@ include("Newsletteranmeldung.php");
                     $anzahl = mysqli_fetch_assoc($collect_anzahl);
                     echo $anzahl['besuche'];
                     ?>
-                </th> <th> Besuche</th>
+                Besuche</th>
                 <p class = "vibeCheck">
                     <?php
                     $rName = ""; $rMail = ""; $sprache = "";
@@ -296,21 +295,21 @@ include("Newsletteranmeldung.php");
                     foreach (preg_split("/((\r?\n)|(\r\n?))/", $data, PHP_INT_MAX ,PREG_SPLIT_NO_EMPTY) as $ignored){
                         $anmeldungCounnter++;
                     }
-                    echo $anmeldungCounnter; ?></th> <th> Anmeldungen</th>
+                    echo $anmeldungCounnter; ?> Anmeldungen</th>
                 <th><?php
                     $sql_abfrage_4 = "SELECT COUNT(name) as total FROM gericht";
                     $collect_anzahl_g = mysqli_query($database_connect,$sql_abfrage_4);
                     $anzahl_gericht = mysqli_fetch_assoc($collect_anzahl_g);
                     echo $anzahl_gericht['total'];
                     ?>
-                </th> <th> Speisen</th>
+                    Speisen</th>
             </tr>
         </table>
-        <p>Haben Sie <a href="wunschgericht.php">Wunschgerichte?</a></p>
+        <p style="font-size: 22px">Haben Sie <a style="font-size: 22px" href="wunschgericht.php">Wunschgerichte?</a></p>
         <h2 id="kontakt">Interesse geweckt? Wir informieren Sie!</h2>
 
         <form action="" method="post">
-            <fieldset>
+            <div>
                 <p>
                     <label for="vorname">Ihr Name:</label>
                     <input name = "vorname" type="text" size="10" placeholder="Vorname" id="vorname" required>
@@ -333,7 +332,7 @@ include("Newsletteranmeldung.php");
                     Den Datenschutzbedingungen stimme ich zu<br><br>
                     <input type="submit" name = "submitForm" value="Zum Newsletter anmelden">
                 </div>
-            </fieldset>
+            </div>
         </form>
         <h2 id="wichtiges">Das ist uns wichtig...</h2>
         <ul id="endList">
@@ -346,7 +345,8 @@ include("Newsletteranmeldung.php");
         <footer>
             <ul>
                 <li>&copy; E-Mensa GmbH</li>
-                <li>Hris, Vammy</li>
+                <li>Hristomir Dimov</li>
+                <li>Muhammad Zulfahmi bin Zaid</li>
                 <li><a href="javascript:" id="Impressum">Impressum</a><li>
             </ul>
         </footer>

@@ -18,7 +18,7 @@
 <?php $this->stopSection(); ?>
 
 <?php $this->startSection('footer'); ?>
- <p>Hier ist footer</p>
+ <p>Footer 2</p>
 <?php $this->stopSection(); ?>
 
 

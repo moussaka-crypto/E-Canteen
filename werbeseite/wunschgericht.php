@@ -90,7 +90,7 @@ VALUES ('$gerichtName', '$beschreibung','$same_id', $datum);";
         <br>
         <input type = "email" size="33" placeholder="E-Mail eingeben" id="email" name="email" required>
         <br>
-        <label for="ersteller">Ihr Name*</label>
+        <label for="ersteller">Ihr Name</label>
         <br>
         <input type="text" size="33" placeholder="Ihren Namen eingeben" id="ersteller" name="ersteller">
         <br><br>

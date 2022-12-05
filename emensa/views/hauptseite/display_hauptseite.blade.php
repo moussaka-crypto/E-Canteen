@@ -20,10 +20,10 @@
     <h2 id="ank">
         <i>Bald gibt's Essen auch online ;)</i>
     </h2>
-    <fieldset>
+    <div>
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
         <br><br>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-    </fieldset>
+    </div>
 @endsection
 
 @section('Gerichte Uebersicht')
@@ -70,8 +70,9 @@
 
 @section('Fußbereich & Copyright')
     <ul>
-        <li>&copy; E-Mensa GmbH</li>
-        <li>Hris, Vammy</li>
+        <li><i>&copy; E-Mensa GmbH</i></li>
+        <li><b>Hristomir Dimov</b></li>
+        <li><b>Muhammad Zulfahmi bin Zaid</b></li>
         <li><a href="javascript:" id="Impressum">Impressum</a><li>
     </ul>
 @endsection
