@@ -22,10 +22,18 @@ if(isset($_POST["gericht"])&&
     isset($_POST["beschreibung"])&&
     isset($_POST["email"]))
 {
+
     $gerichtName = '\''.$_POST["gericht"].'\'';
     $beschreibung = '\''.$_POST["beschreibung"].'\'';
     $email = '\''.$_POST["email"].'\'';
     $ersteller = (!empty($_POST["ersteller"])) ? '\''.$_POST["ersteller"].'\'': 'anonym';
+
+    /*
+    $gerichtName = $_POST["gericht"];
+    $beschreibung = $_POST["beschreibung"];
+    $email = $_POST["email"];
+    $ersteller = (!empty($_POST["ersteller"])) ? $_POST["ersteller"] : 'anonym';
+    */
 
     $gerichtName = htmlspecialchars($gerichtName);
     $beschreibung = htmlspecialchars($beschreibung);

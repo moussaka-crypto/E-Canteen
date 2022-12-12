@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="/css/hauptseite_styles.css">
 </head>
 <body>
-
 <div class="webseite">
 
     @yield('Kopfbereich & Navigation')

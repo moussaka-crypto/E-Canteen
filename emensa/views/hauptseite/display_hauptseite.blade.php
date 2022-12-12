@@ -12,11 +12,21 @@
         <a href="#kontakt">Kontakt</a>
         <a href="#wichtiges">Wichtig f&uuml;r uns</a>
     </div>
+
 @endsection
 
 @section('Begrüßungstext')
     <img src="/img/Spinat_Risotto.jpg" alt="Spinatrisotto" class="pic">
-
+    @if(isset($angemeldet))
+        <div class="Benutzer">
+        <p>Angemeldet als {{$angemeldet}}</p>
+            <button><a href="/abmeldung">Abmelden</a></button>
+        </div>
+    @else
+        <div class="Benutzer">
+            <button><a href="/anmeldung">Jetzt anmelden</a></button>
+        </div>
+    @endif
     <h2 id="ank">
         <i>Bald gibt's Essen auch online ;)</i>
     </h2>
@@ -58,6 +68,7 @@
             </td>
             <td>{{$value['preis_intern']}}</td>
             <td>{{$value['preis_extern']}}</td>
+            <td><img src="/img/gerichte/{{$value['bildname']}}" alt="food"></td>
         </tr>
     @endforeach
 </table>

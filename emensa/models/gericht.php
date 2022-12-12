@@ -51,7 +51,7 @@ function db_5_gericht(){
     try {
         $link = connectdb();
 
-        $sql = 'SELECT id,name,preis_intern,preis_extern FROM gericht g ORDER BY RAND() LIMIT 5';
+        $sql = 'SELECT id,name,preis_intern,preis_extern,bildname FROM gericht g ORDER BY RAND() LIMIT 5';
         $result = mysqli_query($link, $sql);
 
         $data = mysqli_fetch_all($result, MYSQLI_BOTH);
