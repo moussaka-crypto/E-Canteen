@@ -1,4 +1,9 @@
 <?php
+/**
+ * Praktikum DBWT. Autoren:
+ * Muhammad Zulfahmi, bin Zaid, 3520750
+ * Hristomir, Dimov, 3536320
+ */
 $link=mysqli_connect("localhost", // Host der Datenbank
     "root",                 // Benutzername zur Anmeldung
     "root",    // Passwort

@@ -1,12 +1,12 @@
 <?php
 /**
  * Praktikum DBWT. Autoren:
- * Hristomir, Dimov, 3536320
  * Muhammad Zulfahmi, bin Zaid, 3520750
+ * Hristomir, Dimov, 3536320
  */
 $database_connect = mysqli_connect("localhost", // Host der Datenbank
     "root",                 // Benutzername zur Anmeldung
-    "dbwt",    // Passwort
+    "root",    // Passwort
     "emensawerbeseite",     // Auswahl der Datenbanken (bzw. des Schemas)
     3306 // optional port der Datenbank
 );
@@ -22,10 +22,18 @@ if(isset($_POST["gericht"])&&
     isset($_POST["beschreibung"])&&
     isset($_POST["email"]))
 {
+
     $gerichtName = '\''.$_POST["gericht"].'\'';
     $beschreibung = '\''.$_POST["beschreibung"].'\'';
     $email = '\''.$_POST["email"].'\'';
     $ersteller = (!empty($_POST["ersteller"])) ? '\''.$_POST["ersteller"].'\'': 'anonym';
+
+    /*
+    $gerichtName = $_POST["gericht"];
+    $beschreibung = $_POST["beschreibung"];
+    $email = $_POST["email"];
+    $ersteller = (!empty($_POST["ersteller"])) ? $_POST["ersteller"] : 'anonym';
+    */
 
     $gerichtName = htmlspecialchars($gerichtName);
     $beschreibung = htmlspecialchars($beschreibung);
@@ -90,7 +98,7 @@ VALUES ('$gerichtName', '$beschreibung','$same_id', $datum);";
         <br>
         <input type = "email" size="33" placeholder="E-Mail eingeben" id="email" name="email" required>
         <br>
-        <label for="ersteller">Ihr Name</label>
+        <label for="ersteller">Ihr Name*</label>
         <br>
         <input type="text" size="33" placeholder="Ihren Namen eingeben" id="ersteller" name="ersteller">
         <br><br>

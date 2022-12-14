@@ -4,6 +4,8 @@ const PUBLIC_DIRNAME = "public";
 const CONFIG_WEBROUTES = "/../config/web.php";
 const CONFIG_DB = "/../config/db.php";
 
+session_start();
+
 // DEMO
 try {
     if (!file_exists(realpath($_SERVER['DOCUMENT_ROOT'] . "/../vendor/autoload.php"))) {
@@ -275,4 +277,17 @@ function view($viewname, $viewargs = array())
     $blade = new BladeOne($views, $cache, BladeOne::MODE_DEBUG);
 
     return $blade->run($viewname, $viewargs);
+}
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\FirePHPHandler;
+
+function logger()
+{
+    $logger = new Logger('myLogger');
+    //add handlers
+    $logger->pushHandler(new StreamHandler('../storage/logs/pagecall'));
+    $logger->pushHandler(new FirePHPHandler());
+    return $logger;
 }

@@ -44,7 +44,7 @@ class ExampleController
     {
         $data1 = db_kategorie_select_all_name();
         $data2 = db_gericht_name_intern_preis();
-        if ($rd->getGetData()['no'] == 2) {
+        if (isset($rd->getGetData()['no']) && $rd->getGetData()['no'] == 2) {
             return view('examples.m4_7d_page_2', [
                 'request' => $rd,
                 'data' => $data1,

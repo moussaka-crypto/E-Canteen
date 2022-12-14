@@ -78,6 +78,7 @@ footer > ul {
 }
 footer ul li {
     display: inline-block;
+    padding-right: 5px;
     padding-left: 5px;
     border-left: 1px solid indianred;
 }
@@ -101,6 +102,26 @@ ul li:first-child {
 td {
     border: 1px solid black;
 }
+td img{
+     width: 100%;
+     max-height: 160px;
+     object-fit: cover;
+}
 th{
     border: 1px solid black;
+}
+.Benutzer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.Benutzer p{
+    width: 50%;
+}
+.Benutzer button{
+    width: 50%;
+}
+.Gerichtebilder, .GerichteM3
+{
+    padding-top: 10px;
 }

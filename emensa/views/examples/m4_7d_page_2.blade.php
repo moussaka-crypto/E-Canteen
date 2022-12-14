@@ -1,7 +1,7 @@
 @extends('examples.m4_7d_layout',['title'=> 'Kategorie Name'])
 
 @section('header')
-    <h1>Kategorien</h1>
+    <h1>Kategorie Name</h1>
 @endsection
 
 @section('main')
@@ -17,7 +17,7 @@
 @endsection
 
 @section('footer')
-    <p>Footer 2</p>
+    <p>Hier ist footer</p>
 @endsection
 
 

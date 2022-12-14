@@ -12,18 +12,28 @@
         <a href="#kontakt">Kontakt</a>
         <a href="#wichtiges">Wichtig f&uuml;r uns</a>
     </div>
+
 @endsection
 
 @section('Begrüßungstext')
     <img src="/img/Spinat_Risotto.jpg" alt="Spinatrisotto" class="pic">
-
+    @if(isset($angemeldet))
+        <div class="Benutzer">
+        <p>Angemeldet als {{$angemeldet}}</p>
+            <button><a href="/abmeldung">Abmelden</a></button>
+        </div>
+    @else
+        <div class="Benutzer">
+            <button><a href="/anmeldung">Jetzt anmelden</a></button>
+        </div>
+    @endif
     <h2 id="ank">
         <i>Bald gibt's Essen auch online ;)</i>
     </h2>
-    <div>
+    <fieldset>
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
         <br><br>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-    </div>
+    </fieldset>
 @endsection
 
 @section('Gerichte Uebersicht')
@@ -38,7 +48,7 @@
         <tr>
             @foreach($value as $element)
                 @if($loop->last)
-                    <td><img src="{{$element}}" width=260px height=160px alt=gerichte></td>
+                    <td class = "GerichteM3"><img src="{{$element}}" width=260px height=160px alt=gerichte></td>
                 @else
                     <td>{{$element}}</td>
                 @endif
@@ -58,6 +68,7 @@
             </td>
             <td>{{$value['preis_intern']}}</td>
             <td>{{$value['preis_extern']}}</td>
+            <td class = "Gerichtebilder"><img src="../img/gerichte/{{$value['bildname']}}" alt="food"></td>
         </tr>
     @endforeach
 </table>
@@ -70,9 +81,9 @@
 
 @section('Fußbereich & Copyright')
     <ul>
-        <li><i>&copy; E-Mensa GmbH</i></li>
-        <li><b>Hristomir Dimov</b></li>
-        <li><b>Muhammad Zulfahmi bin Zaid</b></li>
+        <li>&copy; E-Mensa GmbH</li>
+        <li>Muhammad Zulfahmi bin Zaid</li>
+        <li>Hristomir Dimov</li>
         <li><a href="javascript:" id="Impressum">Impressum</a><li>
     </ul>
 @endsection

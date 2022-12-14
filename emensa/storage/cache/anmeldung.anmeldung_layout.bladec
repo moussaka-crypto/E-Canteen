@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>E-Mensa Eupenerstraße</title>
+ <?php echo $this->yieldContent("css"); ?>
+</head>
+<body>
+<form class = "Anmeldungsform" method="post" action="/anmeldung_verifizieren">
+ <?php echo $this->yieldContent("formElements"); ?>
+</form>
+</body>
+</html>
