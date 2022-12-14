@@ -32,7 +32,7 @@ function check_anmeldeDaten(){
     }elseif($result_check_id['passwort'] != $passwort) {
         mysqli_query($link,$sql_fehler);
         mysqli_commit($link);
-        $logger->warning("keine Passwort");
+        $logger->warning("falsches Passwort");
         return  "falsches Passwort";
     }
 
