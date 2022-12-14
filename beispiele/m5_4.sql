@@ -6,7 +6,7 @@ WHERE name LIKE '%suppe%';
 
 CREATE VIEW IF NOT EXISTS  view_anmeldungen AS
 SELECT anzahlanmeldungen FROM benutzer
-ORDER BY anzahlanmeldungen ASC;
+ORDER BY anzahlanmeldungen DESC;
 
 CREATE VIEW IF NOT EXISTS view_kategoriegerichte_vegetarisch AS
 SELECT GROUP_CONCAT(g.name) AS gerichtname, k.name AS kategoriename
