@@ -1,10 +1,11 @@
 <?php
 function check_anmeldeDaten(){
     $logger = logger();
+    $salt = "prefix";
 
     $benutzername = $_POST["benutzer_name"];
     $email = $_POST["email"];
-    $passwort = sha1("prefix". $_POST["passwort"]);
+    $passwort = sha1($salt . $_POST["passwort"]);
 
     $link = connectdb();
 
@@ -21,7 +22,7 @@ function check_anmeldeDaten(){
     SET letzterfehler = '$date_to_update'
     WHERE id = ".$id_to_update.";";
 
-
+    //Fehlertypen
     if(is_null($result_check_id['id'])){  //entsprechende Fehlermeldung
         $logger->warning("Keine Anmeldedaten");
         return "Keine Anmeldedaten ):";
@@ -38,8 +39,9 @@ function check_anmeldeDaten(){
         $logger->warning("Falsches Passwort");
         return  "Falsches Passwort ):";
     }
+
     //1.5
-    $update_anmeldungzahl = "CALL anmeldungInkrementieren(".$id_to_update.",'$email');";
+    $update_anmeldungzahl = "CALL anmeldungInkrementieren(".$id_to_update.",'$email');"; //m5_5 aufrufen
     mysqli_query($link,$update_anmeldungzahl);
 
     //1.6
@@ -47,12 +49,12 @@ function check_anmeldeDaten(){
     SET letzteanmeldung = '$date_to_update'
     WHERE id = ".$id_to_update.";";
     mysqli_query($link, $update_date);
+
     mysqli_commit($link); //1.9 end
 
 
     mysqli_close($link);
-    $_SESSION['angemeldet'] = $result_check_id['name'];
+    $_SESSION['angemeldet'] = $result_check_id['name']; // 1.7
     $logger->info("$benutzername ist erfolgreich angemeldet.");
     return "Erfolgreich angemeldet (:";
 }
-

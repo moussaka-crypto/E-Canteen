@@ -48,6 +48,7 @@ class HauptseiteController
     public function call_abmelden(RequestData $rd){
         $logger = logger();
         $logger->info($_SESSION['angemeldet']." hat sich abgemeldet");
+
         $_SESSION['angemeldet'] = null;
         $_SESSION['fehlermeldung'] = null;
         header("Location:/hauptseite_Emensa");

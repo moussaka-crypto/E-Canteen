@@ -283,11 +283,11 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\FirePHPHandler;
 
-function logger()
+function logger(): Logger
 {
     $logger = new Logger('myLogger');
-    //add handlers
-    $logger->pushHandler(new StreamHandler('../storage/logs/pagecall'));
+    //handlers
+    $logger->pushHandler(new StreamHandler('../storage/logs/emensa.log')); //UTC Uhrzeit
     $logger->pushHandler(new FirePHPHandler());
     return $logger;
 }
