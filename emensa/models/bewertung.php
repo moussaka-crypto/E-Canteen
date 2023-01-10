@@ -3,7 +3,7 @@
 function getBewertungData(){
     $link = connectdb();
 
-    $sql = "SELECT * FROM bewertung WHERE gericht_id = '".$_SESSION['auswahl']."'ORDER BY bewertung_id DESC;";
+    $sql = "SELECT * FROM ownreviews WHERE user='".$_SESSION["angemeldet"]."';";
     $result = mysqli_query($link, $sql);
 
     $data = mysqli_fetch_all($result, MYSQLI_BOTH);

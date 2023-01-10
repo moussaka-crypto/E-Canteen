@@ -46,6 +46,7 @@ label[for="sterne"]{
     margin-bottom: -2px;
 }
 .scrollTable{
+    border: 1px solid black;
     width: 100%;
     max-height: 120px;
     overflow: hidden;

@@ -91,7 +91,8 @@
 @endsection
 
 @section("Meinungen unserer Besucher")
-    <table>
+    <h2 id="speisen">Meinungen unserer Kunden</h2>
+    <table class="Food">
         <thead>
         <tr>
         <th>Gericht Name</th>
