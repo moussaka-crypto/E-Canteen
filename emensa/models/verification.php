@@ -55,6 +55,7 @@ function check_anmeldeDaten(){
 
     mysqli_close($link);
     $_SESSION['angemeldet'] = $result_check_id['name']; // 1.7
+    $_SESSION['admin'] = $result_check_id['admin'];
     $logger->info("$benutzername ist erfolgreich angemeldet.");
     return "Erfolgreich angemeldet (:";
 }

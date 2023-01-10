@@ -25,5 +25,11 @@ return array(
 
     '/anmeldung' => 'HauptseiteController@call_anmeldung',
     '/anmeldung_verifizieren' => 'HauptseiteController@call_verify',
-    '/abmeldung' => 'HauptseiteController@call_abmelden'
+    '/abmeldung' => 'HauptseiteController@call_abmelden',
+
+    '/bewertung' => 'BewertungController@bewertung',
+    '/meinebewertungen' =>'BewertungController@meineBewertungen',
+    '/savebewertung' => 'BewertungController@saveBewertung',
+    '/deletebewertung' => 'BewertungController@deleteBewertung',
+    '/gerichtHervorheben' => 'BewertungController@gerichthervorheben'
 );

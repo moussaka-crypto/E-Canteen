@@ -79,6 +79,27 @@
 </ul>
 @endsection
 
+@section('Meinungen')
+    <table class="bewertungsTable" >
+        <tr>
+            <td>Name des Gerichts</td>
+            <td>Bemerkung</td>
+            <td>Bewertung</td>
+        </tr>
+
+        <tbody>
+        @foreach($meinungen as $meinung)
+            <tr>
+                <td> {{$meinung->name}}</td>
+                <td> {{$meinung->bemerkung}}</td>
+                <td> {{$meinung->sternebewertung}}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+
+@endsection
+
 @section('Fußbereich & Copyright')
     <ul>
         <li>&copy; E-Mensa GmbH</li>

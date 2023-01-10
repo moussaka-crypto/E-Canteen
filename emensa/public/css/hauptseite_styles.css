@@ -52,6 +52,14 @@ td{
     width: 90%;
     margin: auto;
 }
+.meinungen{
+    text-align: center;
+}
+.bewertungsTable {
+
+    border: 1px solid black;
+    width: 100%
+}
 .end{
     text-align: center;
     font-size: 30px;

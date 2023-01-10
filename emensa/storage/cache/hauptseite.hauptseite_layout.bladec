@@ -16,7 +16,8 @@
  <?php echo $this->yieldContent('Begrüßungstext'); ?>
  <h2 id="speisen">K&ouml;stlichkeiten, die Sie erwarten</h2>
  <?php echo $this->yieldContent('Gerichte Uebersicht'); ?>
-
+ <h2 class="meinungen">Meinungen unserer Gäste</h2>
+ <?php echo $this->yieldContent('Meinungen'); ?>
  <footer>
  <?php echo $this->yieldContent('Fußbereich & Copyright'); ?>
  </footer>
