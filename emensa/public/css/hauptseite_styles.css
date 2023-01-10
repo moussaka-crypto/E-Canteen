@@ -59,7 +59,8 @@ td{
 footer {
     border-top: 3px solid indigo;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 3px;
+    margin-top: 15px;
 }
 #speisen
 {
