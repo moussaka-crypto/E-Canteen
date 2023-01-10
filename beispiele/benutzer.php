@@ -1,8 +1,8 @@
 <?php
 
-$name = "New Account";
-$email = "newAcc@example.com";
-$passwort = "newAccount";
+$name = "Robby";
+$email = "Robby@food.com";
+$passwort = "eat";
 $salt = "prefix";
 
 $database_connect = mysqli_connect("localhost", // Host der Datenbank
@@ -19,7 +19,7 @@ if (!$database_connect) {
 
 
 $sql_abfrage_1 = "INSERT INTO benutzer (name, admin, email, passwort,letzteanmeldung) VALUES (".
-    "'".$name."',". true .",'".$email."','" .sha1($salt . $passwort)."','".
-    date("d.m.y")."')";
+    "'".$name."',". 0 .",'".$email."','" .sha1($salt . $passwort)."','".
+    date("d.m.y")."');";
 
 $passSql_1 = mysqli_query($database_connect,$sql_abfrage_1);

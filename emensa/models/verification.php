@@ -22,8 +22,8 @@ function check_anmeldeDaten(){
 
 
     if(is_null($result_check_id['id'])){
-        $logger->warning("keine Anmeldedaten");
-        return "keine Anmeldedaten";
+        $logger->warning("keine Anmeldedaten unter dieser Email");
+        return "keine Anmeldedaten unter dieser Email";
     }elseif ($result_check_id['name'] != $benutzername){
         mysqli_query($link,$sql_fehler);
         mysqli_commit($link);
@@ -47,7 +47,22 @@ function check_anmeldeDaten(){
 
     mysqli_close($link);
     $_SESSION['angemeldet'] = $result_check_id['name'];
+    $_SESSION['admin'] = $result_check_id['admin'];
     $logger->info("$benutzername ist erfolgreich angemeldet");
     return "Erfolgreich angemeldet";
 }
+
+function save_bewertung(){
+    $user = $_SESSION["angemeldet"];
+    $description = $_POST["kommentare"];
+    $stern = $_POST["sterne"];
+    $date = date("Y-m-d H:i:s");
+    $gerichtID = $_SESSION["auswahl"];
+
+    $link = connectdb();
+    $sql_id = "INSERT INTO bewertung (user, gericht_id, description, stern, datum) 
+VALUES ('$user','$gerichtID','$description','$stern','$date')";
+    mysqli_query($link, $sql_id);
+}
+
 

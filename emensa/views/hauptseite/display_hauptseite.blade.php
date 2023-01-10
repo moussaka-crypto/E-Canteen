@@ -65,6 +65,9 @@
                     <p>Allergene: {{$allergens_list['allergens']}}</p>
                     @endif
                 @endforeach
+                @if(isset($angemeldet))
+                    <a href="/bewertung?gerichtID={{$value["id"]}}">Bewerten</a>
+                @endif
             </td>
             <td>{{$value['preis_intern']}}</td>
             <td>{{$value['preis_extern']}}</td>
@@ -85,4 +88,25 @@
         <li>Hris, Vammy</li>
         <li><a href="javascript:" id="Impressum">Impressum</a><li>
     </ul>
+@endsection
+
+@section("Meinungen unserer Besucher")
+    <table>
+        <thead>
+        <tr>
+        <th>Gericht Name</th>
+        <th>Bemerkungen</th>
+        <th>Bewertung</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($reviews as $details)
+            <tr>
+                <td>{{$details['gerichtname']}}</td>
+                <td>{{$details['description']}}</td>
+                <td>{{$details['stern']}}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
 @endsection

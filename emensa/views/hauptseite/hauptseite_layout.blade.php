@@ -16,7 +16,7 @@
         @yield('Begrüßungstext')
         <h2 id="speisen">K&ouml;stlichkeiten, die Sie erwarten</h2>
         @yield('Gerichte Uebersicht')
-
+        @yield("Meinungen unserer Besucher")
         <footer>
             @yield('Fußbereich & Copyright')
         </footer>

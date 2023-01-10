@@ -1,0 +1,87 @@
+<?php $_shouldextend[1]=1; ?>
+
+<?php $this->startSection("backfromBewertung"); ?>
+ <button class="returnHome"><a href="/hauptseite_Emensa">Zurück</a></button>
+<?php $this->stopSection(); ?>
+<?php $this->startSection("gericht"); ?>
+ <h3><?php echo \htmlentities($gerichtData[0]["name"]??'', ENT_QUOTES, 'UTF-8', false); ?></h3>
+ <img src="/img/gerichte/<?php echo \htmlentities($gerichtData[0]["bildname"]??'', ENT_QUOTES, 'UTF-8', false); ?>" alt ="Image hier">
+ <div class="bewertungsEingabe centerBody">
+ <button class="meineBewertungen"><a href="/meinebewertungen">Meine Bewertungen</a></button>
+ <form method="post" action="/bewertung_verifizieren">
+ <textarea name="kommentare" id="kommentare" minlength="5" rows="5">Bemerkungen</textarea>
+ <div class="SterneUndSubmit">
+ <label for="sterne">Sterne: </label>
+ <select name="sterne" id="sterne">
+ <option>sehr gut</option>
+ <option>gut</option>
+ <option>schlecht</option>
+ <option>sehr schlecht</option>
+ </select>
+ <input type="submit" value="Submit">
+ </div>
+ </form>
+ </div>
+<?php $this->stopSection(); ?>
+<?php $this->startSection("last30"); ?>
+ <div class="bewertungsInfo centerBody">
+ <h4>Reviews</h4>
+ <?php if($_SESSION['admin']): ?>
+ <!--
+ <form class="centerBody" method="post" action="/bewertung_to_highlight">
+ -->
+ <div class="scrollTable">
+ <table>
+ <tbody>
+ <?php $__currentLoopData = $last30; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $value): $loop = $this->incrementLoopIndices();  ?>
+ <?php if($value['hervorgehoben']): ?>
+ <tr style="color: #3388aa">
+ <td><?php echo \htmlentities($value['user']??'', ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($value['description']??'', ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($value['stern']??'', ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><a href="/bewertung_to_unhighlight?bewertungID=<?php echo \htmlentities($value['bewertung_id']??'', ENT_QUOTES, 'UTF-8', false); ?>">Hervorhebung abwählen</a></td>
+ <!--
+ <td><input type="checkbox" name="toHighlight[]" value="$value['bewertung_id']" checked></td>
+ -->
+ </tr>
+ <?php else: ?>
+ <tr>
+ <td><?php echo \htmlentities($value['user']??'', ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($value['description']??'', ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($value['stern']??'', ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><a href="/bewertung_to_highlight?bewertungID=<?php echo \htmlentities($value['bewertung_id']??'', ENT_QUOTES, 'UTF-8', false); ?>">Hervorheben</a></td>
+ <!--
+ <td><input type="checkbox" name="toHighlight[]" value="$value['bewertung_id']"></td>
+ -->
+ </tr>
+ <?php endif; ?>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </tbody>
+ </table>
+ </div>
+ <!--
+ <input type="submit" value="Hervorheben">
+ </form>
+ -->
+ <?php else: ?>
+ <table>
+ <tbody>
+ <?php $__currentLoopData = $last30; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $value): $loop = $this->incrementLoopIndices();  ?>
+ <?php if($value['hervorgehoben']): ?>
+ <tr style="color: #3388aa">
+ <?php else: ?>
+ <tr>
+ <?php endif; ?>
+ <td><?php echo \htmlentities($value['user']??'', ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($value['description']??'', ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($value['stern']??'', ENT_QUOTES, 'UTF-8', false); ?></td>
+ </tr>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </tbody>
+ </table>
+ <?php endif; ?>
+ </div>
+<?php $this->stopSection(); ?>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild("bewertung.bewertung_layout"); } ?>
