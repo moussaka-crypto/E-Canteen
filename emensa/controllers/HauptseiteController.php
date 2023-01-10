@@ -43,7 +43,7 @@ class HauptseiteController
         if($verify === "Erfolgreich angemeldet"){
             if($_SESSION["fromBewertung"] === true){
                 $_SESSION["fromBewertung"] = false;
-                header("Location:/bewertung");
+                header("Location:/bewertung?gerichtID=");
             }
             else {
                 header("Location:/hauptseite_Emensa");

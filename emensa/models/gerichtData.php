@@ -3,7 +3,13 @@
 function getGerichtData(){
     $link = connectdb();
 
-    $sql = "SELECT * FROM gericht WHERE id = " . $_GET['gerichtID'] .";";
+    $gerichtID = $_GET['gerichtID'] ?? null;
+
+    if(empty($gerichtID)) {
+        echo "gibt bitte die parameter gerichtID einen Wert";
+        exit();
+    }
+    $sql = "SELECT * FROM gericht WHERE id = '$gerichtID' ;";
     $result = mysqli_query($link, $sql);
 
     $data = mysqli_fetch_all($result, MYSQLI_BOTH);

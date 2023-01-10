@@ -1,7 +1,7 @@
 @extends("bewertung.bewertung_layout")
 
 @section("backfromBewertung")
-    <button class="returnHome"><a href="/hauptseite_Emensa">Zurück</a></button>
+    <button class="returnHome"><a href="/hauptseite_Emensa">Zurück zur Haupseite</a></button>
 @endsection
 @section("gericht")
     <h3>{{$gerichtData[0]["name"]}}</h3>
