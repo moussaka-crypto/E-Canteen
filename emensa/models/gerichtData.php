@@ -21,7 +21,7 @@ function getGerichtData(){
 function collectLast30(){
     $link = connectdb();
 
-    $sql = "SELECT * FROM bewertung WHERE gericht_id = " . $_GET['gerichtID'] ."
+    $sql = "SELECT * FROM showlast30 WHERE gerichtID = " . $_GET['gerichtID'] ."
     ORDER BY bewertung_id DESC LIMIT 30;";
     $result = mysqli_query($link, $sql);
 

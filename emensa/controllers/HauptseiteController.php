@@ -59,6 +59,7 @@ class HauptseiteController
         $logger = logger();
         $logger->info($_SESSION['angemeldet']." hat sich abgemeldet");
         $_SESSION['angemeldet'] = null;
+        $_SESSION['benutzerID'] = null;
         $_SESSION['fehlermeldung'] = null;
         header("Location:/hauptseite_Emensa");
     }

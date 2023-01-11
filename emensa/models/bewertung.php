@@ -3,7 +3,7 @@
 function getBewertungData(){
     $link = connectdb();
 
-    $sql = "SELECT * FROM ownreviews WHERE user='".$_SESSION["angemeldet"]."';";
+    $sql = "SELECT * FROM ownreviews WHERE benutzerID='".$_SESSION["benutzerID"]."';";
     $result = mysqli_query($link, $sql);
 
     $data = mysqli_fetch_all($result, MYSQLI_BOTH);

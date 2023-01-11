@@ -48,20 +48,21 @@ function check_anmeldeDaten(){
     mysqli_close($link);
     $_SESSION['angemeldet'] = $result_check_id['name'];
     $_SESSION['admin'] = $result_check_id['admin'];
+    $_SESSION['benutzerID'] = $result_check_id['id'];
     $logger->info("$benutzername ist erfolgreich angemeldet");
     return "Erfolgreich angemeldet";
 }
 
 function save_bewertung(){
-    $user = $_SESSION["angemeldet"];
+    $benutzerID = $_SESSION["benutzerID"];
     $description = $_POST["kommentare"];
     $stern = $_POST["sterne"];
     $date = date("Y-m-d H:i:s");
     $gerichtID = $_SESSION["auswahl"];
 
     $link = connectdb();
-    $sql_id = "INSERT INTO bewertung (user, gericht_id, description, stern, datum) 
-VALUES ('$user','$gerichtID','$description','$stern','$date')";
+    $sql_id = "INSERT INTO bewertung (benutzer_id, gericht_id, description, stern, datum) 
+VALUES ('$benutzerID','$gerichtID','$description','$stern','$date')";
     mysqli_query($link, $sql_id);
 }
 
