@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>E-Mensa Eupenerstraße</title>
+ <link rel="stylesheet" href="/css/bewertung_styles.css">
+</head>
+<body>
+<?php echo $this->yieldContent("backfromBewertung"); ?>
+<div class="centerBody">
+<?php echo $this->yieldContent("gericht"); ?>
+<?php echo $this->yieldContent("last30"); ?>
+<?php echo $this->yieldContent("benutzer"); ?>
+</div>
+</body>
+</html>

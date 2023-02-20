@@ -1,0 +1,67 @@
+.centerBody{
+    margin: auto 30% auto 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.returnHome{
+    position: absolute;
+    margin-left: 30%;
+    z-index: 5;
+}
+img{
+    max-width: 300px;
+    max-height: 300px;
+}
+textarea{
+    width: 80%;
+    margin: auto 10% auto 10%;
+}
+form{
+    width: 100%;
+}
+label[for="sterne"]{
+    margin-left: 18%;
+}
+.SterneUndSubmit input[type="submit"]{
+    width: 20%;
+    margin-right: 10%;
+}
+.SterneUndSubmit select{
+    width: 33%;
+}
+.meineBewertungen{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.bewertungsEingabe{
+    width: 100%;
+}
+.bewertungsInfo{
+    width: 100%;
+}
+.h4{
+    margin-top: -2px;
+    margin-bottom: -2px;
+}
+.scrollTable{
+    border: 1px solid black;
+    width: 100%;
+    max-height: 120px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+table{
+    width: 100%;
+}
+td{
+    text-align: center;
+}
+input[value="Hervorheben"]{
+    width:50%;
+    margin-top: 10px;
+}
+h4{
+   margin: 5px auto 5px auto;
+}
