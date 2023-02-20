@@ -22,14 +22,13 @@ return array(
     '/m4_7c_gerichte' => 'ExampleController@m4_7c_gerichte',
     '/m4_7d_layout' => 'ExampleController@m4_7d_layout',
     '/hauptseite_Emensa' => 'HauptseiteController@call_hauptseite',
-
     '/anmeldung' => 'HauptseiteController@call_anmeldung',
     '/anmeldung_verifizieren' => 'HauptseiteController@call_verify',
     '/abmeldung' => 'HauptseiteController@call_abmelden',
-
-    '/bewertung' => 'BewertungController@bewertung',
-    '/meinebewertungen' =>'BewertungController@meineBewertungen',
-    '/savebewertung' => 'BewertungController@saveBewertung',
-    '/deletebewertung' => 'BewertungController@deleteBewertung',
-    '/gerichtHervorheben' => 'BewertungController@gerichthervorheben'
+    '/bewertung' => 'HauptseiteController@call_bewertung',
+    '/bewertung_verifizieren' => 'HauptseiteController@call_verifyBewertung',
+    '/bewertung_to_highlight' => 'HauptseiteController@call_highlight',
+    '/bewertung_to_unhighlight' => 'HauptseiteController@call_unhighlight',
+    '/meinebewertungen' => 'HauptseiteController@alleBewertungen',
+    '/bewertung_to_delete' => 'HauptseiteController@deleteBewertungen'
 );

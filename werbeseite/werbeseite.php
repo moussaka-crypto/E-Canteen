@@ -1,12 +1,12 @@
 <?php
 /**
  * Praktikum DBWT. Autoren:
- * Muhammad Zulfahmi, bin Zaid, 3520750
  * Hristomir, Dimov, 3536320
+ * Muhammad Zulfahmi, bin Zaid, 3520750
  */
 $database_connect = mysqli_connect("localhost", // Host der Datenbank
     "root",                 // Benutzername zur Anmeldung
-    "root",    // Passwort
+    "dbwt",    // Passwort
     "emensawerbeseite",     // Auswahl der Datenbanken (bzw. des Schemas)
     3306 // optional port der Datenbank
 );

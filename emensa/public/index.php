@@ -15,7 +15,6 @@ try {
     }
     // file exists
     require_once realpath($_SERVER['DOCUMENT_ROOT'] . "/../vendor/autoload.php");
-    require_once realpath($_SERVER['DOCUMENT_ROOT'] . "/../config/orm.php");
 
 } catch (Exception $ex) {
     echo "<code>DOCUMENT_ROOT</code><br><pre>{$_SERVER['DOCUMENT_ROOT']}</pre><code>Error</code><br><pre>" . $ex->getMessage() . "</pre>";
@@ -284,11 +283,11 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\FirePHPHandler;
 
-function logger(): Logger
+function logger()
 {
     $logger = new Logger('myLogger');
-    //handlers
-    $logger->pushHandler(new StreamHandler('../storage/logs/emensa.log')); //UTC Uhrzeit
+    //add handlers
+    $logger->pushHandler(new StreamHandler('../storage/logs/pagecall'));
     $logger->pushHandler(new FirePHPHandler());
     return $logger;
 }

@@ -1,25 +1,13 @@
-CREATE TABLE IF NOT EXISTS Sternebewertung(
-                                              id int primary key auto_increment ,
-                                              bemerkung varchar(200) not null ,
-                                              sternebewertung int not null,
-                                              bewertungszeitpunkt datetime not null,
-                                              hervorgehoben boolean default false,
-                                              benutzer_fk int,
-                                              gericht_fk int,
-                                              check ( sternebewertung > 0 and sternebewertung < 5),
-                                              check (length(bemerkung) > 4)
+USE emensawerbeseite;
+
+CREATE TABLE IF NOT EXISTS bewertung(
+    bewertung_id INT(8) AUTO_INCREMENT PRIMARY KEY ,
+    benutzer_id INT(8),
+    gericht_id INT(8),
+    description VARCHAR(800),
+    stern VARCHAR(800),
+    datum DATETIME,
+    hervorgehoben BOOLEAN DEFAULT false,
+    FOREIGN KEY (benutzer_id) REFERENCES benutzer(id) ON DELETE CASCADE ,
+    FOREIGN KEY (gericht_id) REFERENCES  gericht(id) ON DELETE  CASCADE
 );
-
-Alter TABLE sternebewertung add constraint benutzer_stbew
-    FOREIGN KEY (benutzer_fk)
-        references benutzer(id)
-        on update cascade
-        on delete cascade ;
-
-Alter table sternebewertung add constraint gericht_stbew
-    foreign key (gericht_fk)
-        references gericht(id)
-        on update cascade
-        on delete cascade;
-
-drop table if exists sternebewertung;

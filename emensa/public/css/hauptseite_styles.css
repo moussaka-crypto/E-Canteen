@@ -38,7 +38,6 @@ td{
 .Empty{
     grid-column-start: 1;
     grid-column-end: 2;
-
 }
 .PageSetup{
     grid-column-start: 2;
@@ -52,14 +51,6 @@ td{
     width: 90%;
     margin: auto;
 }
-.meinungen{
-    text-align: center;
-}
-.bewertungsTable {
-
-    border: 1px solid black;
-    width: 100%
-}
 .end{
     text-align: center;
     font-size: 30px;
@@ -68,7 +59,8 @@ td{
 footer {
     border-top: 3px solid indigo;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 3px;
+    margin-top: 15px;
 }
 #speisen
 {
@@ -128,8 +120,4 @@ th{
 }
 .Benutzer button{
     width: 50%;
-}
-.Gerichtebilder, .GerichteM3
-{
-    padding-top: 10px;
 }

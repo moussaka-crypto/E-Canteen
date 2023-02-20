@@ -30,10 +30,10 @@
     <h2 id="ank">
         <i>Bald gibt's Essen auch online ;)</i>
     </h2>
-    <p>
+    <fieldset>
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
         <br><br>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-    </p>
+    </fieldset>
 @endsection
 
 @section('Gerichte Uebersicht')
@@ -48,7 +48,7 @@
         <tr>
             @foreach($value as $element)
                 @if($loop->last)
-                    <td class = "GerichteM3"><img src="{{$element}}" width=260px height=160px alt=gerichte></td>
+                    <td><img src="{{$element}}" width=260px height=160px alt=gerichte></td>
                 @else
                     <td>{{$element}}</td>
                 @endif
@@ -65,10 +65,13 @@
                     <p>Allergene: {{$allergens_list['allergens']}}</p>
                     @endif
                 @endforeach
+                @if(isset($angemeldet))
+                    <a href="/bewertung?gerichtID={{$value["id"]}}">Bewerten</a>
+                @endif
             </td>
             <td>{{$value['preis_intern']}}</td>
             <td>{{$value['preis_extern']}}</td>
-            <td class = "Gerichtebilder"><img src="../img/gerichte/{{$value['bildname']}}" alt="food"></td>
+            <td><img src="/img/gerichte/{{$value['bildname']}}" alt="food"></td>
         </tr>
     @endforeach
 </table>
@@ -79,32 +82,32 @@
 </ul>
 @endsection
 
-@section('Meinungen')
-    <table class="bewertungsTable" >
-        <tr>
-            <td>Name des Gerichts</td>
-            <td>Bemerkung</td>
-            <td>Bewertung</td>
-        </tr>
+@section('Fußbereich & Copyright')
+    <ul>
+        <li>&copy; E-Mensa GmbH</li>
+        <li>Hris, Vammy</li>
+        <li><a href="javascript:" id="Impressum">Impressum</a><li>
+    </ul>
+@endsection
 
+@section("Meinungen unserer Besucher")
+    <h2 id="speisen">Meinungen unserer Kunden</h2>
+    <table class="Food">
+        <thead>
+        <tr>
+        <th>Gericht Name</th>
+        <th>Bemerkungen</th>
+        <th>Bewertung</th>
+        </tr>
+        </thead>
         <tbody>
-        @foreach($meinungen as $meinung)
+        @foreach($reviews as $details)
             <tr>
-                <td> {{$meinung->name}}</td>
-                <td> {{$meinung->bemerkung}}</td>
-                <td> {{$meinung->sternebewertung}}</td>
+                <td>{{$details['gerichtname']}}</td>
+                <td>{{$details['description']}}</td>
+                <td>{{$details['stern']}}</td>
             </tr>
         @endforeach
         </tbody>
     </table>
-
-@endsection
-
-@section('Fußbereich & Copyright')
-    <ul>
-        <li>&copy; E-Mensa GmbH</li>
-        <li>Muhammad Zulfahmi bin Zaid</li>
-        <li>Hristomir Dimov</li>
-        <li><a href="javascript:" id="Impressum">Impressum</a><li>
-    </ul>
 @endsection

@@ -6,7 +6,7 @@
     @yield("css")
 </head>
 <body>
-<form class = "Anmeldungsform" method="post" action="/anmeldung_verifizieren">
+<form method="post" action="/anmeldung_verifizieren">
  @yield("formElements")
 </form>
 </body>
