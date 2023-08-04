@@ -1,4 +1,1 @@
-# E-Mensa
-
-Semesterprojekt im Modul "Datenbanken und Webtechnologien" an der FH Aachen\
-Autoren: Hristomir Dimov, Muhammad Zulfahmi bin Zaid
+#### A demo for an E-Canteen website developed as a part of my Databases and Web Technology course at university.
